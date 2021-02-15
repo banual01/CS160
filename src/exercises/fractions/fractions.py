@@ -68,7 +68,7 @@ class Fraction:
             return (
                 self.numerator / self.denominator == other.numerator / other.denominator
             )
-        raise TypeError("Can only compare Fractions weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        raise TypeError("Can only compare Fractions fuckkkkkkkkkkkkkkkkkkkkkkkkkkkk")
 
     def __gt__(self, other: object) -> bool:
         """Greater than comparison"""
