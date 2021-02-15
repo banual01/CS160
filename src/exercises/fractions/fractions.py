@@ -20,35 +20,63 @@ class Fraction:
 
     def __init__(self, numerator: int, denominator: int) -> None:
         """Initializer"""
-        raise NotImplementedError
+        """if/else function for me to see how programs should go, could be simplefied to for or while function"""
+        """this whole thing can be changed"""
+
+        if type(numerator) and type(denominator) != int:
+            raise TypeError
+        else:
+            self._numerator = numerator
+            self._denominator = denominator            
+
 
     def get_numerator(self) -> int:
         """Return fraction numerator"""
-        raise NotImplementedError
+
+        simple_numerator = self._numerator // gcd(self._numerator,self._denominator)
+        
+        if simple_numerator > self.denominator:
+            mixed_fraction = simple_numerator // gcd(self._numerator,self._denominator)
+            simple_numerator -= gcd(self._numerator,self._denominator)
+
+            return f"{mixed_fraction} {simple_numerator - mixed_fraction}"
+        else:
+            return simple_numerator
 
     numerator = property(get_numerator)
 
     def get_denominator(self) -> int:
         """Return fraction denominator"""
-        raise NotImplementedError
+
+        simple_denominator = self._denominator // gcd(self._numerator,self._denominator)
+
+        return simple_denominator
 
     denominator = property(get_denominator)
 
     def __str__(self) -> str:
-        """Object as a string"""
-        raise NotImplementedError
+        """Object as a string""" 
+        return str(self.numerator) + "/" + str(self.denominator)
 
     def __repr__(self) -> str:
         """Object representation"""
-        raise NotImplementedError
+        return f'Fraction(numerator = {str(numerator)}, denominator = {str(denominator)})'
 
     def __eq__(self, other: object) -> bool:
         """Equality comparison"""
-        raise NotImplementedError
+        if isinstance(other, Fraction):    
+            return (
+                self.numerator / self.denominator == other.numerator / other.denominator
+            )
+        raise TypeError("Can only compare Fractions")
 
     def __gt__(self, other: object) -> bool:
         """Greater than comparison"""
-        raise NotImplementedError
+        if isinstance(other, Fraction):    
+            return (
+                self.numerator / self.denominator > other.numerator / other.denominator
+            )
+        raise TypeError("Can only compare Fractions")
 
     def __ge__(self, other: object) -> bool:
         """Greater than or equal comparison"""
@@ -60,19 +88,39 @@ class Fraction:
 
     def __add__(self, other: object) -> object:
         """Add two fractions"""
-        raise NotImplementedError
+
+        """step by step using least common denominator then adding"""
+        """refer back to GCD for simplefied"""
+
+        new_LCDnum = self.numerator + other.numerator
+        new_LCDden = self.denominator + other.denominator
+        print(gcd(self.denominator, other.denominator))
+
+        return f"{new_LCDnum}/{new_LCDden}"
 
     def __sub__(self, other: object) -> object:
         """Subtract two fractions"""
-        raise NotImplementedError
+
+        """step by step using least common denominator then subtract"""
+        """refer back to GCD for simplefied"""
+
+        return self.numerator / self.denominator - other.numerator / other.denominator
 
     def __mul__(self, other: object) -> object:
         """Multiply two fractions"""
-        raise NotImplementedError
+
+        """step by step using least common denominator then multiply"""
+        """refer back to GCD for simplefied"""
+
+        return self.numerator / self.denominator * other.numerator / other.denominator
 
     def __truediv__(self, other: object) -> object:
         """Divide two fractions"""
-        raise NotImplementedError
+
+        """step by step using least common denominator then divide"""
+        """refer back to GCD for simplefied"""
+
+        return self.numerator / self.denominator / other.numerator / other.denominator
 
 
 def main():
