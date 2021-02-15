@@ -17,7 +17,7 @@ assert solve1(the_data) == expected
 print(f"Found the solution in {stop - start} us")
 # print(f"Solved in {timeit(f'the_data'), setup='from __main__ import the_data, solve1'):3f} us")
 print("You did it!!!!")
-
+print("Hello")
 def solve2(data):
     character = data[0]
     c_count = 1
