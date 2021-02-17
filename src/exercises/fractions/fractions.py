@@ -136,7 +136,6 @@ class Fraction:
     def __mul__(self, other: object) -> object:
         """Multiply two fractions"""
 
-        """step by step using least common denominator then multiply"""
         """refer back to GCD for simplefied"""
 
         if isinstance(other, Fraction):
@@ -149,8 +148,7 @@ class Fraction:
 
     def __truediv__(self, other: object) -> object:
         """Divide two fractions"""
-
-        """step by step using least common denominator then divide"""
+        
         """refer back to GCD for simplefied"""
 
         if isinstance(other, Fraction):
