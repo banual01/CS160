@@ -23,7 +23,7 @@ class Die:
         return self._value
 
     @value.setter
-    def value(self, _):
+    def value(self, dice_value: int) -> None:
         """Value property setter"""
         raise ValueError("You must roll the die to change its value")
 
@@ -33,7 +33,7 @@ class Die:
 
     def roll(self):
         """Roll the die"""
-        raise NotImplementedError
+        return random.choice(self._all_values)
 
 
 class FrozenDie(Die):
@@ -52,11 +52,11 @@ class FrozenDie(Die):
     @frozen.setter
     def frozen(self, new_value: bool) -> None:
         """Frozen property setter"""
-        raise NotImplementedError
+        return new_value
 
     def roll(self):
         """Roll the die"""
-        raise NotImplementedError
+        return random.choice(self._all_values)
 
 
 class Cup:
@@ -72,15 +72,17 @@ class Cup:
 
     def __str__(self) -> str:
         """__str__ override"""
-        return f"{self._dice}"
+        """return a string form of a list"""
+        
+        return f"[{self._dice}]"
 
     def shake(self) -> None:
         """Shake a cup"""
-        raise NotImplementedError
+        return self._dice
 
     def add(self, die: object) -> None:
         """Add a die to the cup"""
-        raise NotImplementedError
+        return self._dice.append(die)
 
     def remove(self, idx: int):
         """Remove a die from the cup"""
