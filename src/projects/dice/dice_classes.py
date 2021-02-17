@@ -20,7 +20,7 @@ class Die:
     @property
     def value(self):
         """Get the die value"""
-        raise NotImplementedError
+        return self._value
 
     @value.setter
     def value(self, _):
@@ -29,7 +29,7 @@ class Die:
 
     def __str__(self):
         """__str__ override"""
-        raise NotImplementedError
+        return f"{self._value}"
 
     def roll(self):
         """Roll the die"""
@@ -47,7 +47,7 @@ class FrozenDie(Die):
     @property
     def frozen(self) -> bool:
         """Frozen property getter"""
-        raise NotImplementedError
+        return self._frozen
 
     @frozen.setter
     def frozen(self, new_value: bool) -> None:
@@ -72,7 +72,7 @@ class Cup:
 
     def __str__(self) -> str:
         """__str__ override"""
-        raise NotImplementedError
+        return f"{self._dice}"
 
     def shake(self) -> None:
         """Shake a cup"""

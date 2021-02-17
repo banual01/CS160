@@ -7,6 +7,8 @@ Testing classes Die and Cup
 
 import random
 import pytest
+import sys
+sys.path.append('C:\\Users\\alexw\\Desktop\\CS160')
 from src.projects.dice import Die, FrozenDie, Cup
 
 
