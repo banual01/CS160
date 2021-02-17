@@ -6,8 +6,10 @@ Testing the class Fraction
 """
 
 import pytest
+import sys
+sys.path.append('C:\\Users\\alexw\\Desktop\\CS160')
+print(sys.path)
 from src.exercises.fractions import Fraction
-
 
 class TestClassFraction:
     """Testing the class Fraction"""

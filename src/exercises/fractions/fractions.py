@@ -20,47 +20,48 @@ class Fraction:
 
     def __init__(self, numerator: int, denominator: int) -> None:
         """Initializer"""
+
         """if/else function for me to see how programs should go, could be simplefied to for or while function"""
         """this whole thing can be changed"""
 
-        if type(numerator) and type(denominator) != int:
-            raise TypeError
+        if type(numerator) != int:
+            raise TypeError("Numerator must be an integer number")
+        elif type(denominator) != int:
+            raise TypeError("Denominator must be an integer number")
         else:
-            self._numerator = numerator
-            self._denominator = denominator            
-
+            self._numerator = numerator // gcd(numerator,denominator)
+            self._denominator = denominator // gcd(numerator,denominator)
+            
 
     def get_numerator(self) -> int:
         """Return fraction numerator"""
 
-        simple_numerator = self._numerator // gcd(self._numerator,self._denominator)
-        
-        if simple_numerator > self.denominator:
-            mixed_fraction = simple_numerator // gcd(self._numerator,self._denominator)
-            simple_numerator -= gcd(self._numerator,self._denominator)
-
-            return f"{mixed_fraction} {simple_numerator - mixed_fraction}"
-        else:
-            return simple_numerator
+        return self._numerator
 
     numerator = property(get_numerator)
 
     def get_denominator(self) -> int:
         """Return fraction denominator"""
 
-        simple_denominator = self._denominator // gcd(self._numerator,self._denominator)
-
-        return simple_denominator
+        return self._denominator
 
     denominator = property(get_denominator)
 
     def __str__(self) -> str:
-        """Object as a string""" 
-        return str(self.numerator) + "/" + str(self.denominator)
+        """Object as a string"""
+        if self.numerator > self.denominator:
+            mixed_number = self.numerator // self.denominator
+            new_numerator = self.numerator - self.denominator * mixed_number        
+            return f"{int(mixed_number)} {int(new_numerator)}/{int(self.denominator)}"
+        else:
+            return str(self._numerator) + "/" + str(self._denominator)
 
     def __repr__(self) -> str:
         """Object representation"""
-        return f'Fraction(numerator = {str(numerator)}, denominator = {str(denominator)})'
+        return f"Fraction({str(self._numerator)}, {str(self._denominator)})"
+
+
+    """using an already establish code in this program, I copypasted it and change the internal function"""
 
     def __eq__(self, other: object) -> bool:
         """Equality comparison"""
@@ -92,11 +93,23 @@ class Fraction:
         """step by step using least common denominator then adding"""
         """refer back to GCD for simplefied"""
 
-        new_LCDnum = self.numerator + other.numerator
-        new_LCDden = self.denominator + other.denominator
-        print(gcd(self.denominator, other.denominator))
+        if isinstance(other, Fraction):
+            if self.denominator == other.denominator:
+                total_num = self.numerator + other.numerator
+                new_totalnum = total_num // gcd(total_num,self.denominator)
+                new_den = self.denominator // gcd(total_num,self.denominator)
+                return Fraction(int(new_totalnum), int(new_den))
+            else:
+                first_num = self.numerator * (other.denominator/gcd(self.denominator, other.denominator))
+                second_num = other.numerator * (self.denominator/gcd(self.denominator, other.denominator))
+                start_num = first_num + second_num
+                start_den = self.denominator * (other.denominator/gcd(self.denominator, other.denominator))
+                new_num = start_num // gcd(start_num,start_den)
+                new_den =  start_den // gcd(start_num,start_den)
+                return Fraction(int(new_num), int(new_den))
 
-        return f"{new_LCDnum}/{new_LCDden}"
+        raise TypeError("Can only add two Fractions")
+
 
     def __sub__(self, other: object) -> object:
         """Subtract two fractions"""
@@ -104,7 +117,21 @@ class Fraction:
         """step by step using least common denominator then subtract"""
         """refer back to GCD for simplefied"""
 
-        return self.numerator / self.denominator - other.numerator / other.denominator
+        if isinstance(other, Fraction):
+            if self.denominator == other.denominator:
+                total_num = self.numerator - other.numerator
+                new_totalnum = total_num // gcd(total_num,self.denominator)
+                new_den = self.denominator // gcd(total_num,self.denominator)
+                return Fraction(int(new_totalnum), int(new_den))
+            else:
+                first_num = self.numerator * (other.denominator/gcd(self.denominator, other.denominator))
+                second_num = other.numerator * (self.denominator/gcd(self.denominator, other.denominator))
+                start_num = first_num - second_num
+                start_den = self.denominator * (other.denominator/gcd(self.denominator, other.denominator))
+                new_num = start_num // gcd(start_num,start_den)
+                new_den =  start_den // gcd(start_num,start_den)
+                return Fraction(int(new_num), int(new_den))
+        raise TypeError("Can only subtract two Fractions")
 
     def __mul__(self, other: object) -> object:
         """Multiply two fractions"""
@@ -112,7 +139,13 @@ class Fraction:
         """step by step using least common denominator then multiply"""
         """refer back to GCD for simplefied"""
 
-        return self.numerator / self.denominator * other.numerator / other.denominator
+        if isinstance(other, Fraction):
+            total_num = self.numerator * other.numerator
+            new_totalnum = total_num // gcd(total_num,self.denominator)
+            total_den = self.denominator * other.denominator
+            new_totalden = total_den // gcd(total_num,self.denominator)
+            return Fraction(int(new_totalnum), int(new_totalden))
+        raise TypeError("Can only multiply two Fractions")
 
     def __truediv__(self, other: object) -> object:
         """Divide two fractions"""
@@ -120,7 +153,13 @@ class Fraction:
         """step by step using least common denominator then divide"""
         """refer back to GCD for simplefied"""
 
-        return self.numerator / self.denominator / other.numerator / other.denominator
+        if isinstance(other, Fraction):
+            total_num = self.numerator * other.denominator
+            new_totalnum = total_num // gcd(total_num,self.denominator)
+            total_den = self.denominator * other.numerator
+            new_totalden = total_den // gcd(total_num,self.denominator)
+            return Fraction(int(new_totalnum), int(new_totalden))
+        raise TypeError("Can only divide two Fractions")
 
 
 def main():
