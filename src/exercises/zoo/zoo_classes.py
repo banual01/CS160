@@ -34,7 +34,10 @@ class Bird(Animal):
         """Bird __init__"""
         # TODO: Invoke __init__ of the superclass
         # TODO: Initialize self._flying
-        raise NotImplementedError
+
+        super().__init__(spec_init, age_init, color_init)
+        self._flying = flying_init
+        
 
     def __str__(self):
         """___str__"""
@@ -52,7 +55,11 @@ class Mammal(Animal):
         """Mammal __init__"""
         # TODO: Invoke __init__ of the superclass
         # TODO: If habitat_init is "Land", "Sea", "Air" or "Tree", initialize self._habitat, else raise a ValueError
-        raise NotImplementedError
+        super().__init__(spec_init, age_init, color_init)
+        if habitat_init in ["Land", "Sea", "Air", "Tree"]:
+            self._habitat = habitat_init
+        else:
+            raise ValueError("Incorrect habitat value")
 
 
 class Parrot(Bird):
@@ -62,12 +69,13 @@ class Parrot(Bird):
         """Parrot __init__"""
         # TODO: Invoke __init__ of the superclass
         # TODO: Initialize self._talking
-        raise NotImplementedError
+        super().__init__("Parrot", age_init, color_init, "Non-flying")
+        self._talking = talking_init
 
     def sound(self):
         """Making Parrot noise"""
         if self._talking:
-            return "'Polly wants a cracker'"
+            return "Polly wants a cracker"
         else:
             return "nothing"
 
@@ -111,12 +119,12 @@ class Dog(Canine):
     def __init__(self, age_init, color_init):
         """Dog __init__"""
         # TODO: Invoke __init__ of the superclass. All dogs live on Land
-        raise NotImplementedError
+        super().__init__("Dog", age_init, color_init, "Land")
 
     def sound(self):
         """Making Dog noise"""
         # TODO: All dogs say "Woof!"
-        raise NotImplementedError
+        return "Woof!"
 
 
 class HouseCat(Feline):
@@ -130,12 +138,15 @@ class HouseCat(Feline):
 class BobCat(Feline):
     """Class BobCat"""
 
-    def __init__(self, age_, color_, habitat_):
+    def __init__(self, age_init, color_init, habitat_init):
         """BobCat __init__"""
         # TODO: Invoke __init__ of the superclass
-        raise NotImplementedError
+        super().__init__("BobCat", age_init, color_init, habitat_init)
+        self.habitat = habitat_init
+        self.color = color_init
+        self.age = age_init
 
     def __str__(self):
         """BobCat __str__"""
         # TODO: Return a string to match the expected output
-        raise NotImplementedError
+        return f"{self.color} {self.habitat} Bobcat ({self.age} yo)"

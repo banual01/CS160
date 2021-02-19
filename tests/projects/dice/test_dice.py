@@ -11,6 +11,8 @@ import random
 import sys
 
 import pytest
+import sys
+sys.path.append('C:\\Users\\alexw\\Desktop\\CS160')
 
 try:
     importlib.util.find_spec("projects.dice", "src")
