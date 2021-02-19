@@ -2,8 +2,12 @@
 """
 Testing the class Fraction
 @authors: Roman Yasinovskyy, Karina Hoff
-@updated: 2019
+@version: 2021.2
 """
+
+import importlib
+import pathlib
+import sys
 
 import pytest
 import sys
@@ -168,4 +172,9 @@ class TestClassFraction:
 
 
 if __name__ == "__main__":
-    pytest.main(["-vv", "test_fractions.py"])
+    pytest.main(
+        [
+            "-vv",
+            str(pathlib.Path("tests", "exercises", "fractions", "test_fractions.py")),
+        ]
+    )
