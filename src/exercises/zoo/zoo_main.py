@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Exercise Zoo driver
+`zoo` driver
+
+@authors: Roman Yasinovskyy
+@version: 2021.2
 """
 
 import random
-from src.exercises.zoo import Parrot, Penguin, Dog, HouseCat, BobCat
-
-# from zoo_classes import Parrot, Penguin, Dog, HouseCat, BobCat  # use this import statement if the other one does not work
+from zoo_classes import Parrot, Penguin, Dog, HouseCat, BobCat
 
 random.seed(42)
 

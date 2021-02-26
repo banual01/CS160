@@ -33,8 +33,13 @@ class Die:
 
     def roll(self):
         """Roll the die"""
+<<<<<<< HEAD
         return random.choice(self._all_values)
 
+=======
+        self._value = random.choice(self._all_values)
+        return self._value
+>>>>>>> 5e73882f8ea0bcb1252886d2732d6100dffbd3d9
 
 class FrozenDie(Die):
     """A die that cannot be rolled"""
@@ -65,6 +70,7 @@ class Cup:
     def __init__(self, num_dice: int, num_sides: int = 6) -> None:
         """Class FrozenDie constructor"""
         self._dice = [Die(range(1, num_sides + 1)) for _ in range(num_dice)]
+        
 
     def __iter__(self):
         """Cup iterator"""
@@ -73,12 +79,24 @@ class Cup:
     def __str__(self) -> str:
         """__str__ override"""
         """return a string form of a list"""
+<<<<<<< HEAD
 
         return f"{self._dice}"
 
     def shake(self) -> None:
         """Shake a cup"""
         return self._dice
+=======
+        result = []
+        for object in self._dice:
+            result.append(object.value)
+        return f"{result}"
+
+    def shake(self) -> None:
+        """Shake a cup"""
+        for dice in self._dice:
+            dice.roll()
+>>>>>>> 5e73882f8ea0bcb1252886d2732d6100dffbd3d9
 
     def add(self, die: object) -> None:
         """Add a die to the cup"""
@@ -90,4 +108,9 @@ class Cup:
 
     def roll(self, *args) -> None:
         """Roll specific dice"""
-        raise NotImplementedError
+        for cube in args:
+            if 0 < cube <= len(self._dice):
+                self._dice[cube-1].roll()
+
+    
+
