@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
 """
-Testing the module Touchscreen Keyboard
-@authors: Roman Yasinovskyy
-@updated: 2019
-"""
+`keyboard` testing
 
-import time
-import pytest
+@authors: Roman Yasinovskyy
+@version: 2021.2
+"""
 
 import importlib
 import pathlib
 import sys
 
 import pytest
-sys.path.append('C:\\Users\\alexw\\Desktop\\CS160')
 
 try:
-    importlib.util.find_spec("projects.keyboard", "src")
+    importlib.util.find_spec(".".join(pathlib.Path(__file__).parts[-3:-1]), "src")
 except ModuleNotFoundError:
-    sys.path.append(str(pathlib.Path(".").parent.parent.parent.absolute()))
+    sys.path.append(f"{pathlib.Path(__file__).parents[3]}/")
 finally:
     from src.projects.keyboard import spell_check
 
@@ -37,6 +34,7 @@ FILENAMES = (
     "gen10000",
 )
 
+
 @pytest.mark.timeout(TIME_LIMIT)
 @pytest.mark.parametrize("filename", FILENAMES)
 def test_output(filename, capsys):
@@ -51,4 +49,4 @@ def test_output(filename, capsys):
 
 
 if __name__ == "__main__":
-    pytest.main(["-v", "test_keyboard.py"])
+    pytest.main(["-v", __file__])
