@@ -7,7 +7,20 @@ Testing the module Touchscreen Keyboard
 
 import time
 import pytest
-from src.projects.keyboard import spell_check
+
+import importlib
+import pathlib
+import sys
+
+import pytest
+sys.path.append('C:\\Users\\alexw\\Desktop\\CS160')
+
+try:
+    importlib.util.find_spec("projects.keyboard", "src")
+except ModuleNotFoundError:
+    sys.path.append(str(pathlib.Path(".").parent.parent.parent.absolute()))
+finally:
+    from src.projects.keyboard import spell_check
 
 TIME_LIMIT = 4
 
