@@ -7,10 +7,6 @@
 
 def spell_check(filename: str) -> None:
     """Rank words by their proximity to the target"""
-
-    with open(f"{filename}") as file_out:
-        expected_output = file_out.read()
-    print(expected_output)
     
     keyboard_dict = {
         1: {"q":1,"w":2,"e":3,"r":4,"t":5,"y":6,"u":7,"i":8,"o":9,"p":10},
