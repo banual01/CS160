@@ -14,14 +14,16 @@ def spell_check(filename: str) -> None:
             line = r.readline().split(" ")
             target = line[0]
             total_test = int(line[1])
+            scores = {}
             for idx in range(total_test):
                 word = r.readline()[:-1]
-                scores = {}
                 score = word_score(target,word)
                 if score not in scores.keys():
                     scores[score] = [word]
                 else:
                     scores[score].append(word)
+            for score_key in scores:
+                scores[score_key].sort()
             sorted_keys = sorted(scores)
             for sorted_key in sorted_keys:
                 for word in scores[sorted_key]:
@@ -33,7 +35,6 @@ keyboard_dict = {
     2: {"a":1,"s":2,"d":3,"f":4,"g":5,"h":6,"j":7,"k":8,"l":9},
     3: {"z":1,"x":2,"c":3,"v":4,"b":5,"n":6,"m":7}
 }
-    #second_strings = ["iopc", "icpc", "gcpc"]
     
 def word_score(target, word):
     score = 0
