@@ -14,7 +14,20 @@ def spell_check(filename: str) -> None:
             line = r.readline().split(" ")
             target = line[0]
             total_test = int(line[1])
+            for idx in range(total_test):
+                word = r.readline()[:-1]
 
+
+                scores = {}
+                score = word.word_score(target,word)
+                if word.word_score(target,word) not in scores.keys():
+                    scores[score] = [word]
+                else:
+                    scores[score].append(word)
+            sorted_keys = sorted(scores)
+            for sorted_key in sorted_keys:
+                for word in scores[sorted_key]:
+                    print(word, sorted_key)
 
 
     keyboard_dict = {
@@ -22,13 +35,13 @@ def spell_check(filename: str) -> None:
         2: {"a":1,"s":2,"d":3,"f":4,"g":5,"h":6,"j":7,"k":8,"l":9},
         3: {"z":1,"x":2,"c":3,"v":4,"b":5,"n":6,"m":7}
     }
-    second_strings = ["iopc", "icpc", "gcpc"]
+    #second_strings = ["iopc", "icpc", "gcpc"]
     
-    def word_score(target, second_string):
+    def word_score(target, word):
         score = 0
         for idx in range (len(target)):
             first_letter = target[idx]
-            second_letter = second_string[idx]
+            second_letter = word[idx]
             vertical = 0
             horizontal = 0
             row1 = 0
@@ -50,18 +63,8 @@ def spell_check(filename: str) -> None:
         
         return(score)
         scores[sorted_key].sort()
-    scores = {}
-    for second_string in second_strings:
-        score = word_score(target,second_string)
-        if word_score(target,second_string) not in scores.keys():
-            scores[score] = [second_string]
-        else:
-            scores[score].append(second_string)
-    sorted_keys = sorted(scores)
-    for sorted_key in sorted_keys:
-        for word in scores[sorted_key]:
-            print(word, sorted_key)
-
+    #for word in words:
+    
 
 
 
