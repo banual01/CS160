@@ -19,8 +19,8 @@ def spell_check(filename: str) -> None:
 
 
                 scores = {}
-                score = word.word_score(target,word)
-                if word.word_score(target,word) not in scores.keys():
+                score = word_score(target,word)
+                if score not in scores.keys():
                     scores[score] = [word]
                 else:
                     scores[score].append(word)
