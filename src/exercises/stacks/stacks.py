@@ -109,7 +109,15 @@ def base_converter(dec_num: int, base: int):
 def rpn_calc(postfix_expr: str):
     # Return Union[int, float]
     """Evaluate a postfix expression"""
-    raise NotImplementedError
+    stack = Stack()
+    for str_index in range(len(postfix_expr)):
+        if  "number" == int:
+            stack.push()
+        elif "operations" == "+" and "-" and "*" and "/":
+            operand1 = stack.pop()[0]
+            operand2 = stack.pop()[1]
+            stack.push(do_math("operation",operand1,operand2)) 
+
 
 
 def do_math(operation: str, operand1: Union[int, float], operand2: Union[int, float]):
