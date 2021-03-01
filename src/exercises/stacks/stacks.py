@@ -122,4 +122,11 @@ def rpn_calc(postfix_expr: str):
 
 def do_math(operation: str, operand1: Union[int, float], operand2: Union[int, float]):
     """Evaluate a mathematical operation"""
-    raise NotImplementedError
+    if operation == "+":
+        return operand1 + operand2
+    elif operation == "-":
+        return operand1 - operand2
+    elif operation == "*":
+        return operand1 * operand2
+    elif operation == "/":
+        return operand1 / operand2                    
