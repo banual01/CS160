@@ -47,7 +47,6 @@ def par_checker(line: str):
         i = i + 1
     return balanced and stack.is_empty()
 
-
 def par_checker_ext(line: str):
     # Return boolean
     """Check if parentheses are balanced"""
@@ -111,14 +110,16 @@ def rpn_calc(postfix_expr: str):
     """Evaluate a postfix expression"""
     stack = Stack()
     for str_index in range(len(postfix_expr)):
-        if  "number" == Union[int, float]:
+        if  postfix_expr[str_index] == Union[int, float]:
             stack.push()
-        elif "operations" == "+" and "-" and "*" and "/":
-            for stack_index in range(stack):
-                operand1 = stack.pop()[0]
-                operand2 = stack.pop()[1]
-                stack.push(do_math("operation",operand1,operand2)) 
-
+        elif postfix_expr[str_index] == "+" and "-" and "*" and "/":
+            for stack_index in range(stack.size()):
+                operand2 = stack.peek()
+                stack.pop()
+                operand1 = stack.peek()
+                stack.pop()
+                stack.push(do_math("operation",operand1,operand2))
+    return Union[stack.peek()]
 
 
 def do_math(operation: str, operand1: Union[int, float], operand2: Union[int, float]):
