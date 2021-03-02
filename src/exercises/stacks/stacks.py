@@ -108,28 +108,28 @@ def base_converter(dec_num: int, base: int):
 def rpn_calc(postfix_expr: str):
     # Return Union[int, float]
     """Evaluate a postfix expression"""
+    expr = {"+", "-", "*", "/"}
     stack = postfix_expr.split()
     math_stack = Stack()
     for str_index in range(len(stack)):
-        if stack[str_index] == Union[int,float]:
-            math_stack.push()
-        elif stack[str_index] == "+" or "-" or "*" or "/":
-            for math_index in range(math_stack.size()):
-                return math_stack.size()-math_index
-            
-    print(math_stack)
-    # stack = Stack()
-    # for str_index in range(len(postfix_expr)):
-    #     if  postfix_expr[str_index] == Union[int, float]:
-    #         stack.push()
-    #     elif postfix_expr[str_index] == "+" and "-" and "*" and "/":
-    #         for stack_index in range(stack.size()):
-    #             operand2 = stack.peek()
-    #             stack.pop()
-    #             operand1 = stack.peek()
-    #             stack.pop()
-    #             stack.push(do_math("operation",operand1,operand2))
-    # return Union[stack.peek()]
+        if stack[str_index] not in expr:
+            try:
+                int(stack[str_index])
+                float(stack[str_index])
+                operation = int(stack[str_index])
+                math_stack.push(operation)
+            except:
+                raise TokenError(f"Unknown token: {stack[str_index]}")
+        else: 
+            try:
+                op2 = math_stack.pop()
+                op1 = math_stack.pop()
+                math_stack.push(do_math(stack[str_index], op1, op2))
+            except:
+                raise StackError("Stack is empty")    
+    if math_stack.size() > 1:
+        raise StackError("Stack is not empty")
+    return math_stack.peek()
 
 
 def do_math(operation: str, operand1: Union[int, float], operand2: Union[int, float]):
