@@ -141,4 +141,4 @@ def do_math(operation: str, operand1: Union[int, float], operand2: Union[int, fl
     elif operation == "*":
         return operand1 * operand2
     elif operation == "/":
-        return operand1 / operand2                    
+        return operand1 / operand2
