@@ -114,7 +114,7 @@ def rpn_calc(postfix_expr: str):
         if  "number" == Union[int, float]:
             stack.push()
         elif "operations" == "+" and "-" and "*" and "/":
-            for stack_index in range:
+            for stack_index in range(stack):
                 operand1 = stack.pop()[0]
                 operand2 = stack.pop()[1]
                 stack.push(do_math("operation",operand1,operand2)) 
