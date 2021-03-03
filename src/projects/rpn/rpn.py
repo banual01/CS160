@@ -27,15 +27,16 @@ class TokenError(Exception):
 
 def postfix_eval(postfix_expr: str) -> int:
     # TODO: Evaluate an expression
+    operation = {"+", "-", "*", "/", "%"}
     eval_stack = postfix_expr
     math_stack = Stack()
     for str_index in range(len(eval_stack)):
-        if eval_stack[str_index] not in {"+", "-", "*", "/", "%"}:
+        if eval_stack[str_index] not in operation:
             try:
                 int(eval_stack[str_index])
                 float(eval_stack[str_index])
-                operation = int(eval_stack[str_index])
-                math_stack.push(operation)
+                Number = int(eval_stack[str_index])
+                math_stack.push(Number)
             except:
                 raise TokenError(f"Unknown token: {eval_stack[str_index]}")
         else: 
