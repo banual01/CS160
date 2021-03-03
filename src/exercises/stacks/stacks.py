@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-`stacks` implementation
-
-@author:
-"""
-
 from typing import Union
 
 from pythonds3.basic import Stack
@@ -24,13 +17,21 @@ class TokenError(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
-def rev_string(my_str: str) -> str:
+def rev_string(my_str: str):
+    # Return str
     """Reverse characters in a string using a stack"""
-    raise NotImplementedError
+    str_stack = Stack()
+    for char in my_str:
+        str_stack.push(char)
+    reverse_str = ""
+    for rchar in range(len(my_str)):
+        reverse_str += str_stack.pop()
+    
+    return reverse_str
 
-
-def par_checker(line: str) -> bool:
+def par_checker(line: str):
     """Textbook implementation"""
+    # Return boolean
     stack = Stack()
     balanced = True
     i = 0
@@ -46,27 +47,98 @@ def par_checker(line: str) -> bool:
         i = i + 1
     return balanced and stack.is_empty()
 
-
-def par_checker_ext(line: str) -> bool:
+def par_checker_ext(line: str):
+    # Return boolean
     """Check if parentheses are balanced"""
-    raise NotImplementedError
+    stack = Stack()
+    open_symbol = {"(":1, "{":2, "[":3, "<":4}
+    end_symbol = {")":1, "}":2, "]":3, ">":4}
+    balanced = True
+    i = 0
+    while i < len(line) and balanced:
+        symbol = line[i]
+        if symbol in open_symbol:
+            stack.push(symbol)
+        elif symbol in end_symbol:
+            if stack.is_empty():
+                balanced = False
+            else:
+                if end_symbol[symbol] == open_symbol[stack.peek()]: 
+                    stack.pop()
+                else:
+                    balanced = False
+        i += 1
+    return balanced and stack.is_empty()
 
-
-def par_checker_file(filename: str) -> None:
+def par_checker_file(filename: str):
     """Check expressions in the file"""
-    raise NotImplementedError
+    with open(filename,"r") as r:
+        inputcase = r.readlines()
+        for line in inputcase:
+            line = line[:-1]
+            if par_checker_ext(line):
+                print(f"{line} is balanced")
+            else:
+                print(f"{line} is NOT balanced")
 
-
-def base_converter(dec_num: int, base: int) -> str:
+def base_converter(dec_num: int, base: int):
+    # Return str
     """Convert a decimal number to any base"""
-    raise NotImplementedError
+    acceptable_base = [2,8,16]
+    new_string = ""
+    if base in acceptable_base:
+        digits = "0123456789ABCDEF"
+        rem_stack = Stack()
+
+        while dec_num > 0:
+            rem = dec_num % base
+            rem_stack.push(rem)
+            dec_num = dec_num // base
+
+        while not rem_stack.is_empty():
+            new_string = new_string + digits[rem_stack.pop()]
+
+    if new_string == "":
+        raise ValueError(f"Cannot convert to base {base}.")
+    else:
+        return f"{new_string}"
+        
 
 
-def rpn_calc(postfix_expr: str) -> Union[int, float]:
+def rpn_calc(postfix_expr: str):
+    # Return Union[int, float]
     """Evaluate a postfix expression"""
-    raise NotImplementedError
+    expr = {"+", "-", "*", "/"}
+    stack = postfix_expr.split()
+    math_stack = Stack()
+    for str_index in range(len(stack)):
+        if stack[str_index] not in expr:
+            try:
+                int(stack[str_index])
+                float(stack[str_index])
+                operation = int(stack[str_index])
+                math_stack.push(operation)
+            except:
+                raise TokenError(f"Unknown token: {stack[str_index]}")
+        else: 
+            try:
+                op2 = math_stack.pop()
+                op1 = math_stack.pop()
+                math_stack.push(do_math(stack[str_index], op1, op2))
+            except:
+                raise StackError("Stack is empty")    
+    if math_stack.size() > 1:
+        raise StackError("Stack is not empty")
+    return math_stack.peek()
 
 
 def do_math(operation: str, operand1: Union[int, float], operand2: Union[int, float]):
     """Evaluate a mathematical operation"""
-    raise NotImplementedError
+    if operation == "+":
+        return operand1 + operand2
+    elif operation == "-":
+        return operand1 - operand2
+    elif operation == "*":
+        return operand1 * operand2
+    elif operation == "/":
+        return operand1 / operand2

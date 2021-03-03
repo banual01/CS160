@@ -24,16 +24,52 @@ class TokenError(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
+op_expr = {"+", "-", "*", "/"}
+
 def postfix_eval(postfix_expr: str) -> int:
     # TODO: Evaluate an expression
-    raise NotImplementedError
+    eval_stack = postfix_expr.spilt()
+    for str_index in range(len(eval_stack)):
+        try:
+            int(eval_stack[str_index])
+            float(eval_stack[str_index])
+            return postfix_expr
+        except:
+            raise TokenError(f"Unknown token: {eval_stack[str_index]}")
 
 
 def do_math(op: str, op1: int, op2: int) -> int:
     # TODO: Process arithmetic operations
-    raise NotImplementedError
+    if op == "+":
+        return op1 + op2
+    elif op == "-":
+        return op1 - op2
+    elif op == "*":
+        return op1 * op2
+    elif op == "/":
+        return op1 / op2
 
 
 def rpn_calc(filename: str) -> int:
     # TODO: Read lines from the file and pass them to the postfix_eval
-    raise NotImplementedError
+    
+    with open(filename, "r") as r:
+        expr = r.readline()
+        postfix_expr = postfix_eval(expr)
+    
+    stack = postfix_expr.split()
+    math_stack = Stack()
+    for str_index in range(len(stack)):
+        if stack[str_index] not in op_expr:
+            operation = int(stack[str_index])
+            math_stack.push(operation)
+        else: 
+            try:
+                op2 = math_stack.pop()
+                op1 = math_stack.pop()
+                math_stack.push(do_math(stack[str_index], op1, op2))
+            except:
+                raise StackError("Stack is empty")    
+    if math_stack.size() > 1:
+        raise StackError("Stack is not empty")
+    return math_stack.peek()
