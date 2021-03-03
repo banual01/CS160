@@ -36,7 +36,7 @@ def test_checksum(filename, expected):
     assert pytest.approx(rpn_calc(f"data/projects/rpn/{filename}"), 0.01) == expected
 
 
-@pytest.mark.parametrize(
+@pytest.mark.parametrize( 
     "expression, err_message",
     [
         ("=", "Stack is empty"),
