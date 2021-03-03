@@ -43,6 +43,11 @@ def do_math(op: str, op1: int, op2: int) -> int:
 
 def rpn_calc(filename: str) -> int:
     # TODO: Read lines from the file and pass them to the postfix_eval
+    
+    with open(filename, "r") as r:
+        expr = r.readline()
+        postfix_expr = expr.postfix_eval()
+    
     expr = {"+", "-", "*", "/"}
     stack = postfix_expr.split()
     math_stack = Stack()
