@@ -27,10 +27,10 @@ class TokenError(Exception):
 
 def postfix_eval(postfix_expr: str) -> int:
     # TODO: Evaluate an expression
-    eval_stack = postfix_expr.spilt()
+    eval_stack = postfix_expr
     math_stack = Stack()
     for str_index in range(len(eval_stack)):
-        if eval_stack[str_index] not in {"+", "-", "*", "/"}:
+        if eval_stack[str_index] not in {"+", "-", "*", "/", "%"}:
             try:
                 int(eval_stack[str_index])
                 float(eval_stack[str_index])
@@ -68,7 +68,7 @@ def rpn_calc(filename: str) -> int:
     # TODO: Read lines from the file and pass them to the postfix_eval
     
     with open(filename, "r") as r:
-        expr = r.readline()
-        postfix_expr = postfix_eval(expr)
+        for expr in r:
+            postfix_expr = postfix_eval(expr.strip().split())
     
 
