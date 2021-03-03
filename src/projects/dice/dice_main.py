@@ -5,11 +5,6 @@ Dice game(s) simulator
 
 import random
 from dice_classes import Die, FrozenDie, Cup
-<<<<<<< HEAD
-
-# from dice_classes import Die, FrozenDie, Cup  # try this if the above import statement does not work
-=======
->>>>>>> 5e73882f8ea0bcb1252886d2732d6100dffbd3d9
 
 random.seed(42)
 
