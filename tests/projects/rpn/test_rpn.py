@@ -36,7 +36,7 @@ def test_checksum(filename, expected):
     assert pytest.approx(rpn_calc(f"data/projects/rpn/{filename}"), 0.01) == expected
 
 
-@pytest.mark.parametrize( 
+@pytest.mark.parametrize(
     "expression, err_message",
     [
         ("=", "Stack is empty"),
@@ -53,7 +53,7 @@ def test_postfix_eval_stack_error(expression, err_message):
     assert exception_message == err_message
 
 
-@pytest.mark.parametrize(
+@pytest.mark.parametrize( 
     "expression, err_message, err_token",
     [("a b + =", "Unknown token", "a"), ("1 2 @ =", "Unknown token", "@")],
 )
