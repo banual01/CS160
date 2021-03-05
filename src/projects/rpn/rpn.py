@@ -104,7 +104,6 @@ def rpn_calc(filename: str):
         try:
             postfix_expr = postfix_eval(expr.strip().split())
             checksum += postfix_expr
-        except Exception as Error:
+        except:
             continue
-    
     return checksum
