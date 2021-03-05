@@ -99,11 +99,11 @@ def rpn_calc(filename: str):
     # TODO: Read lines from the file and pass them to the postfix_eval
     
     checksum = 0
-    file_open = open(filename, "r")
-    for expr in file_open:
-        try:
-            postfix_expr = postfix_eval(expr.strip().split())
-            checksum += postfix_expr
-        except:
-            continue
-    return checksum
+    with open(filename, "r") as r:
+        for expr in r:
+            try:
+                postfix_expr = postfix_eval(expr.strip().split())
+                checksum += postfix_expr
+            except:
+                continue
+        return checksum
