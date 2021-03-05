@@ -100,7 +100,7 @@ def rpn_calc(filename: str):
     
     checksum = 0
     with open(filename, "r") as r:
-        for expr in r:
+    for expr in r:
             try:
                 postfix_expr = postfix_eval(expr.strip().split())
                 checksum += postfix_expr
