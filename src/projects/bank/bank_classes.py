@@ -15,7 +15,10 @@ class Address:
         self, street_init: str, city_init: str, state_init: str, zip_init: str
     ):
         """__init__"""
-        raise NotImplementedError
+        self._street = street_init
+        self._city = city_init
+        self._state = state_init
+        self._zip = zip_init
 
     # TODO: Implement data members as properties
 
@@ -33,7 +36,9 @@ class Customer:
 
     def __init__(self, name_init: str, dob_init: str, address_init: object):
         """Constructor"""
-        raise NotImplementedError
+        self._name = name_init
+        self._dob = dob_init
+        self._address = address_init
 
     # TODO: Implement data members as properties
 
@@ -52,7 +57,8 @@ class Account(ABC):
     @abstractmethod
     def __init__(self, owner_init: object, balance_init: float = 0):
         """Constructor"""
-        raise NotImplementedError
+        self._owner = owner_init
+        self._balance = balance_init
 
     # TODO: Implement data members as properties
 
@@ -74,7 +80,8 @@ class CheckingAccount(Account):
 
     def __init__(self, owner_init: object, fee_init: float, balance_init: float = 0):
         """Constructor"""
-        raise NotImplementedError
+        super().__init__(owner_init, balance_init)
+        self._fee = fee_init
 
     def process_check(self, amount: float):
         """Process a check"""
@@ -89,10 +96,10 @@ class SavingsAccount(Account):
     """CheckingAccount class"""
 
     def __init__(
-        self, owner_init: object, interest_rate_init: float, balance_init: float = 0
-    ):
+        self, owner_init: object, interest_rate_init: float, balance_init: float = 0):
         """Constructor"""
-        raise NotImplementedError
+        super().__init__(owner_init, balance_init)
+        self._interest_rate = interest_rate_init
 
     def yield_interest(self):
         """Yield annual interest"""
