@@ -131,9 +131,8 @@ class Account(ABC):
 
     def close(self):
         """Close account"""
-        if self._balance < 0:
-            closed_account = self._balance = 0
-            return round(closed_account, 2)
+        self._balance = 0
+        return round(self._balance, 2)
 
     def __str__(self):
         """__str__"""
