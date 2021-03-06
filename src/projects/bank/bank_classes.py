@@ -51,7 +51,7 @@ class Customer:
 
     def __str__(self):
         """__str"""
-        return f"{self.name} ({self.dob}) {self.address}"
+        return f"{self.name} ({self.dob})\n{str(self.address)}"
 
 
 class Account(ABC):
