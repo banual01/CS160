@@ -24,11 +24,14 @@ class Address:
 
     def __eq__(self, other: object):
         """Compare 2 addresses"""
-        raise NotImplementedError
+        try:
+            self.address == other.address
+        except:
+            self.address is not other.address
 
     def __str__(self):
         """__str method"""
-        return f"{self.street}, {self.city}, {self.state}, {self.zip}"
+        return f"{self.street}\n{self.city}, {self.state} {self.zip}"
 
 
 class Customer:
