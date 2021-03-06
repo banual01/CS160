@@ -91,7 +91,7 @@ class CheckingAccount(Account):
 
     def process_check(self, amount: float):
         """Process a check"""
-        return Account.deposit(amount)
+        return Account.deposit(self, amount)
 
     def __str__(self):
         """__str__"""
