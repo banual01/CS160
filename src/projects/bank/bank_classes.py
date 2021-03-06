@@ -38,7 +38,7 @@ class Customer:
         """Constructor"""
         self._name = name_init
         self._dob = dob_init
-        self._address = address_init
+        self._address = Address(address_init)
 
     # TODO: Implement data members as properties
 
@@ -57,7 +57,7 @@ class Account(ABC):
     @abstractmethod
     def __init__(self, owner_init: object, balance_init: float = 0):
         """Constructor"""
-        self._owner = owner_init
+        self._owner = Customer(owner_init)
         self._balance = balance_init
 
     # TODO: Implement data members as properties
