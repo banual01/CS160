@@ -67,7 +67,10 @@ class Account(ABC):
 
     def deposit(self, amount: float):
         """Add money"""
-        raise NotImplementedError
+        if amount >= 0:
+            return self.balance + amount
+        else:
+            raise ValueError("Must deposit positive amount")
 
     def close(self):
         """Close account"""
@@ -88,11 +91,11 @@ class CheckingAccount(Account):
 
     def process_check(self, amount: float):
         """Process a check"""
-        raise NotImplementedError
+        return Account.deposit(amount)
 
     def __str__(self):
         """__str__"""
-        raise NotImplementedError
+        return f"Checking account\nOwner: {self.owner}\nBalance: {self.balance:.2f}"
 
 
 class SavingsAccount(Account):
@@ -110,4 +113,4 @@ class SavingsAccount(Account):
 
     def __str__(self):
         """__str__"""
-        raise NotImplementedError
+        return f"Savings account\nOwner: {self.owner}\nBalance: {self.balance:.2f}"
