@@ -15,10 +15,10 @@ class Address:
         self, street_init: str, city_init: str, state_init: str, zip_init: str
     ):
         """__init__"""
-        self._street = street_init
-        self._city = city_init
-        self._state = state_init
-        self._zip = zip_init
+        self.street = street_init
+        self.city = city_init
+        self.state = state_init
+        self.zip = zip_init
 
     # TODO: Implement data members as properties
 
@@ -28,7 +28,7 @@ class Address:
 
     def __str__(self):
         """__str method"""
-        raise NotImplementedError
+        return f"{self.street}, {self.city}, {self.state}, {self.zip}"
 
 
 class Customer:
@@ -36,9 +36,9 @@ class Customer:
 
     def __init__(self, name_init: str, dob_init: str, address_init: object):
         """Constructor"""
-        self._name = name_init
-        self._dob = dob_init
-        self._address = Address(address_init)
+        self.name = name_init
+        self.dob = dob_init
+        self.address = address_init
 
     # TODO: Implement data members as properties
 
@@ -48,7 +48,7 @@ class Customer:
 
     def __str__(self):
         """__str"""
-        raise NotImplementedError
+        return f"{self.name} ({self.dob}) {self.address}"
 
 
 class Account(ABC):
@@ -57,8 +57,8 @@ class Account(ABC):
     @abstractmethod
     def __init__(self, owner_init: object, balance_init: float = 0):
         """Constructor"""
-        self._owner = Customer(owner_init)
-        self._balance = balance_init
+        self.owner = owner_init
+        self.balance = balance_init
 
     # TODO: Implement data members as properties
 
@@ -72,7 +72,7 @@ class Account(ABC):
 
     def __str__(self):
         """__str__"""
-        raise NotImplementedError
+        return f"{self._owner}, {self._balance}"
 
 
 class CheckingAccount(Account):
