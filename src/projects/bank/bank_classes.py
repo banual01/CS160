@@ -45,18 +45,14 @@ class Address:
 
     def __eq__(self, other: object):
         """Compare 2 addresses"""
-        try:
-            self._street == other._street
-            self._city == other._city
-            self._state == other._state
-            self._zip == other._zip
-            return self.address and other.address
-        except:
-            self._street != other._street
-            self._city != other._city
-            self._state != other._state
-            self._zip != other._zip
-            return None
+        if isinstance(other, Address):    
+            return (
+                self._street == other._street
+                and self._city == other._city
+                and self._state == other._state
+                and self._zip == other._zip
+            )
+
 
     def __str__(self):
         """__str method"""
@@ -92,8 +88,7 @@ class Customer:
 
     def move(self, new_address: object):
         """Change address"""
-        new_address = Address(self._address)
-        return new_address
+        self._address = new_address
 
     def __str__(self):
         """__str"""
@@ -150,11 +145,9 @@ class CheckingAccount(Account):
     def process_check(self, amount: float):
         """Process a check"""
         if self._balance >= amount:
-            new_checamount = self._balance - amount
-            return round(new_checamount, 2)
+            self._balance = self._balance - amount
         else:
-            new_feeamount = self._balance - self._fee
-            return round(new_feeamount, 2)
+            self._balance = self._balance - self._fee
 
     def __str__(self):
         """__str__"""
@@ -170,10 +163,16 @@ class SavingsAccount(Account):
         super().__init__(owner_init, balance_init)
         self._interest_rate = interest_rate_init
 
+    @property
+    def interest_rate(self):
+        """Get the interest rate"""
+        return self._interest_rate
+
+
     def yield_interest(self):
         """Yield annual interest"""
-        new_interaccount = self._balance * (1 + self._interest_rate / 100)
-        return round(new_interaccount, 2)
+        self._balance = self._balance * (1 + self._interest_rate / 100)
+
 
     def __str__(self):
         """__str__"""
