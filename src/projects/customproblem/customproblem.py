@@ -3,149 +3,144 @@
 customproblem classes
 """
 
-# from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 
 
-# class :
-#     """ class"""
+class Car:
+    """Car class"""
 
-#     def __init__(self,   ):
-#         """__init__"""
-
-
-#     # TODO: Implement data members as properties
-
-#     @property
-#     def (self):
-#         """Get the """
-#         return self._
-
-#     @property
-#     def (self):
-#         """Get the """
-#         return self._
+    def __init__(self, size_init, speed_init):
+        """__init__"""
+        self._size = size_init
+        self._speed = speed_init
 
 
-#     def __eq__(self, other: object):
-#         """Compare 2 """
-#         if isinstance(other, ):    
-#             return (
-#                 self._ == other._
-#                 and self._ == other._
-#             )
+    # TODO: Implement data members as properties
+
+    @property
+    def size(self):
+        """Get the size"""
+        return self._size
+
+    @property
+    def speed(self):
+        """Get the speed"""
+        return self._speed
+
+    def __eq__(self, other: object):
+        """Compare 2 Cars"""
+        if isinstance(other, Car):    
+            return (
+                self._size == other._size
+                and self._speed == other._speed
+            )
 
 
-#     def __str__(self):
-#         """__str method"""
-#         return f"{self._}\n{self._}"
+    def __str__(self):
+        """__str method"""
+        return f"{self._}\n{self._}"
 
 
-# class :
-#     """ class"""
+class Player:
+    """Player class"""
 
-#     def __init__(self, ):
-#         """Constructor"""
-
-
-#     # TODO: Implement data members as properties
-
-#     @property
-#     def (self):
-#         """Get the """
-#         return self._
-
-#     @property
-#     def (self):
-#         """Get the """
-#         return self._
+    def __init__(self, name_init, cars_init, inventory_init):
+        """Constructor"""
+        self._name = name_init
+        self._cars = cars_init
+        self._inventory = inventory_init
 
 
-#     def move(self, new_: object):
-#         """Change """
-#         self._ = new_
 
-#     def __str__(self):
-#         """__str"""
-#         return f"{self._}\n{str(self._)}"
+    # TODO: Implement data members as properties
 
+    @property
+    def cars(self):
+        """Get the cars"""
+        return self._cars
 
-# class (ABC):
-#     """ class"""
+    @property
+    def name(self):
+        """Get the name"""
+        return self._name
 
-#     @abstractmethod
-#     def __init__(self, ):
-#         """Constructor"""
+    @property
+    def inventory(self):
+        """Get the inventory"""
+        return self._inventory
 
-
-#     # TODO: Implement data members as properties
-
-#     @property
-#     def (self):
-#         """Get the """
-#         return self._
-
-#     @property
-#     def (self):
-#         """Get the """
-#         return self._
+    def __str__(self):
+        """__str"""
+        return f"{self._}\n{str(self._)}"
 
 
-#     def deposit(self, amount: float):
-#         """Add money"""
-#         if amount >= 0:
-#             self._balance += amount
-#         else:
-#             raise ValueError("Must deposit positive amount")
+class GameMode(ABC):
+    """Game Mode class"""
 
-#     def close(self):
-#         """Close account"""
-#         self._balance = 0
-#         return round(self._balance, 2)
-
-#     def __str__(self):
-#         """__str__"""
-#         return f"{self._}, {self._}"
+    @abstractmethod
+    def __init__(self, player_init, stadium_init, rank_init):
+        """Constructor"""
+        self._player = player_init
+        self._stadium = stadium_init
+        self._rank = rank_init
 
 
-# class :
-#     """ class"""
+    # TODO: Implement data members as properties
 
-#     def __init__(self, ):
-#         """Constructor"""
-#         super().__init__()
+    @property
+    def player(self):
+        """Get the player"""
+        return self._player
 
+    @property
+    def stadium(self):
+        """Get the stadium"""
+        return self._stadium
 
-#     def process_check(self, amount: float):
-#         """Process a check"""
-#         if self._balance >= amount:
-#             self._balance = self._balance - amount
-#         else:
-#             self._balance = self._balance - self._fee
+    @property
+    def rank(self):
+        """Get the rank"""
+        return self._rank
 
-#     def __str__(self):
-#         """__str__"""
-#         return f""
-
-
-# class :
-#     """ class"""
-
-#     def __init__(self, ):
-#         """Constructor"""
-#         super().__init__()
+    def __str__(self):
+        """__str__"""
+        return f"{self._}, {self._}"
 
 
-#     @property
-#     def interest_rate(self):
-#         """Get the interest rate"""
-#         return self._interest_rate
+class RankMode:
+    """Rank Mode class"""
+
+    def __init__(self, drop_init, player_init, stadium_init, rank_init):
+        """Constructor"""
+        super().__init__(player_init, stadium_init, rank_init)
+        self._drop = drop_init
 
 
-#     def yield_interest(self):
-#         """Yield annual interest"""
-#         self._balance = self._balance * (1 + self._interest_rate / 100)
+    @property
+    def drop_item(self):
+        """Get the drop item"""
+        return self._drop
+
+    def __str__(self):
+        """__str__"""
+        return f""
 
 
-#     def __str__(self):
-#         """__str__"""
-#         return f""
+class TournyMode:
+    """Tourny Mode class"""
+
+    def __init__(self, credits_init, player_init, stadium_init, rank_init):
+        """Constructor"""
+        super().__init__(player_init, stadium_init, rank_init)
+        self._credits = credits_init
+
+
+    @property
+    def credits(self):
+        """Get the credits"""
+        return self._credits
+
+
+    def __str__(self):
+        """__str__"""
+        return f""
