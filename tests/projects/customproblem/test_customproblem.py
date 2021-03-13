@@ -60,13 +60,13 @@ class TestCustomProblemMethods:
         car = Car(self._carname, size, speed)
         car.sizespeedratio(size, speed)
         assert car.ratio == pytest.approx(size / speed, 0.01)
-        assert car.strip() == (
-            f"{size}:{speed}\n a size-to-speed ratio of {car.ratio}"
-        )
 
+    
     def test_speedbracket(self):
         """Testing speedbracket method"""
-        pass
+        car = Car(self._carname, self._size, self._speed)
+
+        assert car.speedbracket == expected
 
     def test_startinventoryspace(self):
         """Testing startinventoryspace method"""

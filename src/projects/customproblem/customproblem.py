@@ -44,7 +44,6 @@ class Car:
 
     def sizespeedratio(self, size:float, speed:float):
         ratio = size / speed
-        return f"{size}:{speed}\n a size-to-speed ratio of {ratio}"
 
     def speedbracket(self):
         if 0 < speed <= 20:
@@ -89,7 +88,7 @@ class Player:
 
     def __str__(self):
         """__str"""
-        return f"{self._}\n{str(self._)}"
+        return f"{self._name}\n{str(self._cars)}\n{str(self._inventory)}"
 
 
 class GameMode(ABC):
@@ -129,7 +128,7 @@ class GameMode(ABC):
 
     def __str__(self):
         """__str__"""
-        return f"{self._}, {self._}"
+        return f"{self._player}\nFavorite Stadium:{self._stadium}\nRank:{self._rank}"
 
 
 class RankMode:
@@ -156,7 +155,7 @@ class RankMode:
 
     def __str__(self):
         """__str__"""
-        return f""
+        return f"{self._player}\nFavorite Stadium:{self._stadium}\nRank:{self._rank}\nDrops:{self._drop}"
 
 
 class TournyMode:
@@ -194,4 +193,4 @@ class TournyMode:
 
     def __str__(self):
         """__str__"""
-        return f""
+        return f"{self._player}\nFavorite Stadium:{self._stadium}\nRank:{self._rank}\nCredits:{self._credit}"
