@@ -54,48 +54,72 @@ class TestCustomProblemMethods:
     def setup_class(self):
         """Setting up"""
         pass
+    
 
+    @pytest.mark.parametrize(car_attributes, cars)
     def test_sizespeedratio(self, size, speed):
         """Testing sizespeedratio method"""
         car = Car(self._carname, size, speed)
         car.sizespeedratio(size, speed)
         assert car.ratio == pytest.approx(size / speed, 0.01)
 
-    
-    def test_speedbracket(self):
-        """Testing speedbracket method"""
-        car = Car(self._carname, self._size, self._speed)
+    # @pytest.mark.parametrize(car_attributes, cars)
+    # def test_speedbracket(self):
+    #     """Testing speedbracket method"""
+    #     car = Car(self._carname, self._size, self._speed)
+    #     car.speedbracket(speed)
+    #     assert car.speedbracket ==
 
-        assert car.speedbracket == expected
-
+    @pytest.mark.parametrize(player_attributes, players)
     def test_startinventoryspace(self):
         """Testing startinventoryspace method"""
-        pass
+        assert Car.startinventoryspace == 0
 
+    
     def test_d(self):
         """Testing something"""
         pass
-
+    
+    @pytest.mark.parametrize(gamemode_attributes, gamemodes)
     def test_ranksystem(self):
         """Testing ranksystem method"""
         pass
 
+    @pytest.mark.parametrize(gamemode_attributes, gamemodes)
     def test_prevstadium(self):
         """Testing prevstadium method"""
         pass
 
+    @pytest.mark.parametrize(rankmode_attributes, rankmodes)
     def test_dropsystem(self):
         """Testing dropsystem"""
         pass
 
-    def test_partyrankaver(self):
+    @pytest.mark.parametrize(rankmode_attributes, rankmodes)
+    def test_partyrankaver(self, other:object, partysize:int):
         """Testing partyrankaver"""
-        pass
+        partysize = 2
+        rankmode = RankMode(self._drop, self._player, self._stadium, self._rank)
+        rankmode.partyrankaver(partysize) 
+        assert rankmodes.rank == pytest.approx(self._rank + other._rank / partysize, 0.01)
 
+    @pytest.mark.parametrize(tournymode_attributes, tournymodes)
     def test_tradecredits(self):
         """Testing tradecredits"""
-        pass
+        creditsbracket = 303453
+        tournymodes.tradecredits(creditsbracket)
+        assert tournymodes.credits == pytest.approx(
+            credits - creditsbracket
+            if credits >= creditsbracket
+            else
+            0.01,
+        )
+        with pytest.raises(ValueError) as excinfo:
+            tournymodes.tradecredits(creditsbracket)
+        exception_msg = excinfo.value.args[0]
+        assert exception_msg == "Not enough credits to be traded in for an item"
 
+    @pytest.mark.parametrize(tournymode_attributes, tournymodes)
     def test_creditsgain(self):
         """Testing creditsgain"""
         pass
