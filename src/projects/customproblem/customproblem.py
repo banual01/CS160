@@ -9,8 +9,9 @@ from abc import ABC, abstractmethod
 class Car:
     """Car class"""
 
-    def __init__(self, size_init, speed_init):
+    def __init__(self, carname_init, size_init, speed_init):
         """__init__"""
+        self._carname = carname_init
         self._size = size_init
         self._speed = speed_init
 
@@ -27,18 +28,34 @@ class Car:
         """Get the speed"""
         return self._speed
 
+    @property
+    def car_name(self):
+        """Get the car's name"""
+        return self._carname
+
     def __eq__(self, other: object):
         """Compare 2 Cars"""
         if isinstance(other, Car):    
             return (
                 self._size == other._size
                 and self._speed == other._speed
+                and self._carname == other._carname
             )
+
+    def sizespeedratio(self, size:float, speed:float):
+        ratio = size / speed
+        return f"{size}:{speed}\n a size-to-speed ratio of {ratio}"
+
+    def speedbracket(self):
+        if 0 < speed <= 20:
+            return "This is a slow car"
+        elif speed > 20:
+            return "This is a speedy car"
 
 
     def __str__(self):
         """__str method"""
-        return f"{self._}\n{self._}"
+        return f"{self._carname}: {self._size}\n Speed: {self._speed}"
 
 
 class Player:
@@ -68,6 +85,9 @@ class Player:
     def inventory(self):
         """Get the inventory"""
         return self._inventory
+
+    def startinventoryspace(self):
+        self._inventory = 0
 
     def __str__(self):
         """__str"""
@@ -101,6 +121,13 @@ class GameMode(ABC):
     def rank(self):
         """Get the rank"""
         return self._rank
+
+    # def ranksystem(self, unranked:int, win:dictionary):
+    #     for 
+
+    # def prevstadium(self, other:object):
+    #     while self._stadium == other._stadium:
+
 
     def __str__(self):
         """__str__"""
@@ -139,6 +166,24 @@ class TournyMode:
     def credits(self):
         """Get the credits"""
         return self._credits
+
+    def __eq__(self, other: object):
+        """Compare 2 players's tourny bracket placement"""
+        if isinstance(other, TournyMode):    
+            return (
+                self._rank == other._rank
+            )
+        else:
+            raise ValueError("Not in the same tourny bracket")
+
+    def tradecredits(self, creditsbracket:int):
+        if self._credits >= creditsbracket:
+            self._credits = self._credits - creditsbracket
+        else:
+            raise ValueError("Not enough credits to be traded in for an item")
+    
+    # def creditsgain(self, addcredits:int, win:dictionary):
+    #     for
 
 
     def __str__(self):
