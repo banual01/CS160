@@ -35,13 +35,13 @@ gamemodes = [
 ]
 rankmode_attributes = "drop, player, stadium, rank"
 rankmodes = [
-    (35, Player(*players[0]), "AquaDome", 1000)
-    (45, Player(*players[1]), "Champions Field", 790)
+    (35, Player(*players[0]), "AquaDome", 200)
+    (45, Player(*players[1]), "DFH Stadium", 850)
 ]
 tournymode_attributes = "credits, player, stadium, rank"
 tournymodes = [
-    (340058, Player(*players[0]), "AquaDome", 1000)
-    (8932543, Player(*players[1]), "Champions Field", 790)
+    (340058, Player(*players[0]), "Beckwith Park", 1230)
+    (8932543, Player(*players[1]), "Neo Tokyo", 397)
 ]
 
 
@@ -55,9 +55,14 @@ class TestCustomProblemMethods:
         """Setting up"""
         pass
 
-    def test_sizespeedratio(self):
+    def test_sizespeedratio(self, size, speed):
         """Testing sizespeedratio method"""
-        pass
+        car = Car(self._carname, size, speed)
+        car.sizespeedratio(size, speed)
+        assert car.ratio == pytest.approx(size / speed, 0.01)
+        assert car.strip() == (
+            f"{size}:{speed}\n a size-to-speed ratio of {car.ratio}"
+        )
 
     def test_speedbracket(self):
         """Testing speedbracket method"""
