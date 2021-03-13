@@ -146,10 +146,10 @@ class RankMode:
         """Get the drop item"""
         return self._drop
 
-    # def flatstadium(self):
-    #     if self._stadium != "flat":
+    # def dropsystem(self, win:dictionary):
+    #     for
 
-    def partyrankaver(self, other: object, partysize: int):
+    def partyrankaver(self, other:object, partysize:int):
         totalparty_rank = self._rank + other._rank
         return totalparty_rank / partysize
 
@@ -173,7 +173,7 @@ class TournyMode:
         """Get the credits"""
         return self._credits
 
-    def __eq__(self, other: object):
+    def __eq__(self, other:object):
         """Compare 2 players's tourny bracket placement"""
         if isinstance(other, TournyMode):    
             return (

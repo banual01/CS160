@@ -19,6 +19,7 @@ except ModuleNotFoundError:
 finally:
     from src.projects.bank import Address, Customer, CheckingAccount
 
+address_attributes = "street, city, state, zip_code"
 addresses = [
     ("700 College Dr", "Decorah", "IA", "52101"),
     ("1000 5th Ave", "New York", "NY", "10028"),
