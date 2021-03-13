@@ -67,8 +67,6 @@ class Player:
         self._cars = cars_init
         self._inventory = inventory_init
 
-
-
     # TODO: Implement data members as properties
 
     @property
@@ -147,6 +145,14 @@ class RankMode:
     def drop_item(self):
         """Get the drop item"""
         return self._drop
+
+    # def flatstadium(self):
+    #     if self._stadium != "flat":
+
+    def partyrankaver(self, other: object, partysize: int):
+        totalparty_rank = self._rank + other._rank
+        return totalparty_rank / partysize
+
 
     def __str__(self):
         """__str__"""
