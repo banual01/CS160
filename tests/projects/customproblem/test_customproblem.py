@@ -40,7 +40,7 @@ rankmodes = [
 ]
 tournymode_attributes = "credits, player, stadium, rank"
 tournymodes = [
-    (340058, Player(*players[0]), "Beckwith Park", "Gold"),
+    (3058, Player(*players[0]), "Beckwith Park", "Gold"),
     (8932543, Player(*players[1]), "Neo Tokyo", "Silver")
 ]
 
