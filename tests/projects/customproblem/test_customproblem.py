@@ -21,27 +21,30 @@ finally:
 car_attributes = "carname, size, speed"
 cars = [
     ("Octane", "Medium", 52.5),
-    ("Merc", "Big", 28.9),
+    ("Merc", "Big", 28.9)
 ]
-player_attributes = "name, cars, inventory"
+player_attributes = "name, cars, inventory, won"
+
+
 players = [
-    ("John Doe", Car(*cars[0]), 10)
-    ("Jane Doe", Car(*cars[1]), 39)
+    ("John Doe", Car(*cars[0]), 10, 30),
+    ("Jane Doe", Car(*cars[1]), 39, 40)
 ]
-gamemode_attributes = "player, stadium, rank"
+
+gamemode_attributes = "player, stadium, result"
 gamemodes = [
-    (Player(*players[0]), "AquaDome", 1000)
-    (Player(*players[1]), "Champions Field", 790)
+    (Player(*players[0]), "AquaDome", "Win"),
+    (Player(*players[1]), "Champions Field", "Lose")
 ]
 rankmode_attributes = "drop, player, stadium, rank"
 rankmodes = [
-    (35, Player(*players[0]), "AquaDome", 200)
-    (45, Player(*players[1]), "DFH Stadium", 850)
+    (35, Player(*players[0]), "AquaDome", "Gold"),
+    (45, Player(*players[1]), "DFH Stadium", "Bronze")
 ]
 tournymode_attributes = "credits, player, stadium, rank"
 tournymodes = [
-    (340058, Player(*players[0]), "Beckwith Park", 1230)
-    (8932543, Player(*players[1]), "Neo Tokyo", 397)
+    (340058, Player(*players[0]), "Beckwith Park", "Gold"),
+    (8932543, Player(*players[1]), "Neo Tokyo", "Silver")
 ]
 
 
@@ -57,10 +60,10 @@ class TestCustomProblemMethods:
     
 
     @pytest.mark.parametrize(car_attributes, cars)
-    def test_sizespeedratio(self, size, speed):
+    def test_sizespeedratio(self, carname, size, speed):
         """Testing sizespeedratio method"""
         car = Car(self._carname, size, speed)
-        car.sizespeedratio(size, speed)
+        car.sizespeedratio(carname, size, speed)
         assert car.ratio == pytest.approx(size / speed, 0.01)
 
     # @pytest.mark.parametrize(car_attributes, cars)
