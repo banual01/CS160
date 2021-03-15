@@ -20,8 +20,8 @@ finally:
 
 car_attributes = "carname, size, speed"
 cars = [
-    ("Octane", "Medium", 52.5),
-    ("Merc", "Big", 28.9)
+    ("Octane", 34, 52.5),
+    ("Merc", 272, 28.9)
 ]
 player_attributes = "name, cars, inventory, won"
 players = [
@@ -52,12 +52,12 @@ class TestCustomProblemMethods:
     @pytest.fixture(scope="function", autouse=True)
     def setup_class(self):
         """Setting up"""
-        pass
+        
 
 
     def test_sizeSpeedRatio(self, size, speed):
         """Testing sizespeedratio method"""
-        assert Car.ratio == pytest.approx(size / speed, 0.01)
+        assert Car.ratio == pytest.approx(size/speed, 0.01)
 
     # @pytest.mark.parametrize(car_attributes, cars)
     # def test_speedBracket(self):
