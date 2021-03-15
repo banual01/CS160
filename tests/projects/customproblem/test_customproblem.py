@@ -70,7 +70,7 @@ class TestCustomProblemMethods:
     #     car.speedbracket(speed)
     #     assert car.speedbracket ==
 
-    @pytest.mark.parametrize(player_attributes, players)
+
     def test_startInventorySpace(self):
         """Testing startinventoryspace method"""
         assert Car.startinventoryspace == 0
@@ -79,23 +79,23 @@ class TestCustomProblemMethods:
     def test_gameResult(self):
         """Testing gameresult method"""
         pass
-    
-    @pytest.mark.parametrize(gamemode_attributes, gamemodes)
+
+
     def test_rankChange(self):
         """Testing ranksystem method"""
         pass
 
-    @pytest.mark.parametrize(gamemode_attributes, gamemodes)
+
     def test_addItem(self):
         """Testing additem method"""
         pass
 
-    @pytest.mark.parametrize(rankmode_attributes, rankmodes)
+
     def test_dropSystem(self):
         """Testing dropsystem"""
         pass
 
-    @pytest.mark.parametrize(rankmode_attributes, rankmodes)
+
     def test_partyRankAver(self, other:object, partysize:int):
         """Testing partyrankaver"""
         partysize = 2
@@ -103,7 +103,7 @@ class TestCustomProblemMethods:
         rankmode.partyrankaver(partysize) 
         assert rankmodes.rank == pytest.approx(self._rank + other._rank / partysize, 0.01)
 
-    @pytest.mark.parametrize(tournymode_attributes, tournymodes)
+
     def test_tradeCredits(self):
         """Testing tradecredits"""
         creditsbracket = 303453
@@ -119,7 +119,7 @@ class TestCustomProblemMethods:
         exception_msg = excinfo.value.args[0]
         assert exception_msg == "Not enough credits to be traded in for an item"
 
-    @pytest.mark.parametrize(tournymode_attributes, tournymodes)
+
     def test_dropCredit(self):
         """Testing creditsgain"""
         pass
