@@ -25,8 +25,8 @@ cars = [
 ]
 player_attributes = "name, cars, inventory, won"
 players = [
-    ("John Doe", Car(*cars[0]), 10, 30),
-    ("Jane Doe", Car(*cars[1]), 39, 40)
+    ("John Doe", Car(*cars[0]), {"Tournament": 0, "Ranking": []}, 30),
+    ("Jane Doe", Car(*cars[1]), {"Tournament": 0, "Ranking": []}, 40)
 ]
 gamemode_attributes = "player, stadium, result"
 gamemodes = [
@@ -53,27 +53,22 @@ class TestCustomProblemMethods:
     @pytest.fixture(scope="function", autouse=True)
     def setup_class(self):
         """Setting up"""
-        pass
-    
+   
 
-    @pytest.mark.parametrize(car_attributes, cars)
-    def test_sizeSpeedRatio(self, carname, size, speed):
+
+    def test_sizeSpeedRatio(self, size, speed):
         """Testing sizespeedratio method"""
-        car = Car(self._carname, size, speed)
-        car.sizespeedratio(carname, size, speed)
-        assert car.ratio == pytest.approx(size / speed, 0.01)
+        assert Car.ratio == pytest.approx(size / speed, 0.01)
 
     # @pytest.mark.parametrize(car_attributes, cars)
     # def test_speedBracket(self):
     #     """Testing speedBracket method"""
-    #     car = Car(self._carname, self._size, self._speed)
-    #     car.speedbracket(speed)
     #     assert car.speedbracket ==
 
 
     def test_startInventorySpace(self):
         """Testing startinventoryspace method"""
-        assert Car.startinventoryspace == 0
+        assert Player.startInventorySpace == {"Tournament": 0, "Ranking": []}
 
     
     def test_gameResult(self):
@@ -100,14 +95,14 @@ class TestCustomProblemMethods:
         """Testing partyrankaver"""
         partysize = 2
         rankmode = RankMode(self._drop, self._player, self._stadium, self._rank)
-        rankmode.partyrankaver(partysize) 
+        rankmode.partyRankAver(partysize) 
         assert rankmodes.rank == pytest.approx(self._rank + other._rank / partysize, 0.01)
 
 
     def test_tradeCredits(self):
         """Testing tradecredits"""
         creditsbracket = 303453
-        tournymodes.tradecredits(creditsbracket)
+        tournymodes.tradeCredits(creditsbracket)
         assert tournymodes.credits == pytest.approx(
             credits - creditsbracket
             if credits >= creditsbracket
@@ -115,7 +110,7 @@ class TestCustomProblemMethods:
             0.01,
         )
         with pytest.raises(ValueError) as excinfo:
-            tournymodes.tradecredits(creditsbracket)
+            tournymodes.tradeCredits(creditsbracket)
         exception_msg = excinfo.value.args[0]
         assert exception_msg == "Not enough credits to be traded in for an item"
 
