@@ -79,7 +79,7 @@ class OrderedList:
 
     def add(self, value: typing.Any) -> None:
         """Add a new item to the list"""
-        raise NotImplementedError
+        self.add(value)
 
     def pop(self, position: int = None):
         """
@@ -93,11 +93,11 @@ class OrderedList:
 
     def append(self, value: typing.Any) -> None:
         """Add a new item to the end of the list"""
-        raise NotImplementedError
+        self.add(value)
 
     def insert(self, position: int, value: typing.Any) -> None:
         """Insert a new item into the list"""
-        raise NotImplementedError
+        self.add(value)
 
     def search(self, value: typing.Any) -> bool:
         """Search for an item in the list"""
