@@ -24,13 +24,10 @@ cars = [
     ("Merc", "Big", 28.9)
 ]
 player_attributes = "name, cars, inventory, won"
-
-
 players = [
     ("John Doe", Car(*cars[0]), 10, 30),
     ("Jane Doe", Car(*cars[1]), 39, 40)
 ]
-
 gamemode_attributes = "player, stadium, result"
 gamemodes = [
     (Player(*players[0]), "AquaDome", "Win"),

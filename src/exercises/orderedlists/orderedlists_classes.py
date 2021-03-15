@@ -79,7 +79,21 @@ class OrderedList:
 
     def add(self, value: typing.Any) -> None:
         """Add a new item to the list"""
-        self.add(value)
+        """Code from textbook"""
+        current = self.head
+        previous = None
+        temp = Node(value)
+
+        while current is not None and current.data < value:
+            previous = current
+            current = current.next
+
+        if previous is None:
+            temp.next = self.head
+            self.head = temp
+        else:
+            temp.next = current
+            previous.next = temp
 
     def pop(self, position: int = None):
         """
@@ -93,11 +107,17 @@ class OrderedList:
 
     def append(self, value: typing.Any) -> None:
         """Add a new item to the end of the list"""
-        self.add(value)
+        current = self._head
+        while current:
+            if current is not None:
+                current = current.next
+            else:
+                self.add(value)
+
 
     def insert(self, position: int, value: typing.Any) -> None:
         """Insert a new item into the list"""
-        self.add(value)
+        raise NotImplementedError
 
     def search(self, value: typing.Any) -> bool:
         """Search for an item in the list"""

@@ -44,10 +44,10 @@ class Car:
                 and self._carname == other._carname
             )
 
-    def sizespeedratio(self, size:float, speed:float):
+    def sizeSpeedRatio(self, size:float, speed:float):
         ratio = size / speed
 
-    def speedbracket(self):
+    def speedBracket(self):
         if 0 < speed <= 20:
             return "This is a slow car"
         elif speed > 20:
@@ -91,7 +91,7 @@ class Player:
         """Get the number of won matches"""
         return self._won
 
-    def startinventoryspace(self):
+    def startInventorySpace(self):
         self._inventory = {"Tournament": 0, "Ranking": []}
 
     def addItem(self, mode, item):
@@ -167,13 +167,13 @@ class RankMode:
         """Get the drop item"""
         return self._drop
 
-    def dropsystem(self):
+    def dropSystem(self):
         items = ["Costume", "Money", "Wheels", "Boost"]
         if self._result == "Win":
             self.player.inventory["Ranking"].append(random.choice(items))
 
-    def partyrankaver(self, other:object, partysize:int):
-        totalparty_rank = self._rank + other._rank
+    def partyRankAver(self, other:object, partysize:int):
+        totalparty_rank = self._won + other._won
         return totalparty_rank / partysize
 
 
@@ -208,7 +208,7 @@ class TournyMode:
         if self._result == "Win":
             self.player.inventory["Tournament"] += 50
 
-    def tradecredits(self, creditsbracket:int):
+    def tradeCredits(self, creditsbracket:int):
         if self._credits >= creditsbracket:
             self._credits = self._credits - creditsbracket
         else:
