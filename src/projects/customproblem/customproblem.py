@@ -209,8 +209,9 @@ class TournyMode:
             self.player.inventory["Tournament"] += 50
 
     def tradeCredits(self, creditsbracket:int):
+        # self._credits = self.player.inventory.get("Tournament")
         if self._credits >= creditsbracket:
-            self._credits = self._credits - creditsbracket
+            self._credits -= creditsbracket
         else:
             raise ValueError("Not enough credits to be traded in for an item")
 

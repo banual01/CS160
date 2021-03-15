@@ -18,32 +18,31 @@ finally:
 
 
 
-car_attributes = "carname, size, speed"
-cars = [
-    ("Octane", "Medium", 52.5),
-    ("Merc", "Big", 28.9)
-]
-player_attributes = "name, cars, inventory, won"
-players = [
-    ("John Doe", Car(*cars[0]), {"Tournament": 0, "Ranking": []}, 30),
-    ("Jane Doe", Car(*cars[1]), {"Tournament": 0, "Ranking": []}, 40)
-]
-gamemode_attributes = "player, stadium, result"
-gamemodes = [
-    (Player(*players[0]), "AquaDome", "Win"),
-    (Player(*players[1]), "Champions Field", "Lose")
-]
-rankmode_attributes = "drop, player, stadium, rank"
-rankmodes = [
-    (35, Player(*players[0]), "AquaDome", "Gold"),
-    (45, Player(*players[1]), "DFH Stadium", "Bronze")
-]
-tournymode_attributes = "credits, player, stadium, rank"
-tournymodes = [
-    (340058, Player(*players[0]), "Beckwith Park", "Gold"),
-    (8932543, Player(*players[1]), "Neo Tokyo", "Silver")
-]
-
+# car_attributes = "carname, size, speed"
+# cars = [
+#     ("Octane", "Medium", 52.5),
+#     ("Merc", "Big", 28.9)
+# ]
+# player_attributes = "name, cars, inventory, won"
+# players = [
+#     ("John Doe", Car(*cars[0]), {"Tournament": 0, "Ranking": []}, 30),
+#     ("Jane Doe", Car(*cars[1]), {"Tournament": 0, "Ranking": []}, 40)
+# ]
+# gamemode_attributes = "player, stadium, result"
+# gamemodes = [
+#     (Player(*players[0]), "AquaDome", "Win"),
+#     (Player(*players[1]), "Champions Field", "Lose")
+# ]
+# rankmode_attributes = "drop, player, stadium, rank"
+# rankmodes = [
+#     (35, Player(*players[0]), "AquaDome", "Gold"),
+#     (45, Player(*players[1]), "DFH Stadium", "Bronze")
+# ]
+# tournymode_attributes = "credits, player, stadium, rank"
+# tournymodes = [
+#     (340058, Player(*players[0]), "Beckwith Park", "Gold"),
+#     (8932543, Player(*players[1]), "Neo Tokyo", "Silver")
+# ]
 
 
 
