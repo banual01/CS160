@@ -53,7 +53,7 @@ class TestCustomProblemMethods:
     @pytest.fixture(scope="function", autouse=True)
     def setup_class(self):
         """Setting up"""
-   
+        pass
 
 
     def test_sizeSpeedRatio(self, size, speed):
@@ -93,9 +93,6 @@ class TestCustomProblemMethods:
 
     def test_partyRankAver(self, other:object, partysize:int):
         """Testing partyrankaver"""
-        partysize = 2
-        rankmode = RankMode(self._drop, self._player, self._stadium, self._rank)
-        rankmode.partyRankAver(partysize) 
         assert rankmodes.rank == pytest.approx(self._rank + other._rank / partysize, 0.01)
 
 
