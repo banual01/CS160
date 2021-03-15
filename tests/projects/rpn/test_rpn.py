@@ -53,7 +53,7 @@ def test_postfix_eval_stack_error(expression, err_message):
     assert exception_message == err_message
 
 
-@pytest.mark.parametrize(
+@pytest.mark.parametrize( 
     "expression, err_message, err_token",
     [("a b + =", "Unknown token", "a"), ("1 2 @ =", "Unknown token", "@")],
 )

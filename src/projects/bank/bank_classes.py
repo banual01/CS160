@@ -15,17 +15,48 @@ class Address:
         self, street_init: str, city_init: str, state_init: str, zip_init: str
     ):
         """__init__"""
-        raise NotImplementedError
+        self._street = street_init
+        self._city = city_init
+        self._state = state_init
+        self._zip = zip_init
 
     # TODO: Implement data members as properties
 
+    @property
+    def street(self):
+        """Get the street"""
+        return self._street
+
+    @property
+    def city(self):
+        """Get the city"""
+        return self._city
+
+    @property
+    def state(self):
+        """Get the state"""
+        return self._state
+
+    @property
+    def zip(self):
+        """Get the zip"""
+        return self._zip
+
+
     def __eq__(self, other: object):
         """Compare 2 addresses"""
-        raise NotImplementedError
+        if isinstance(other, Address):    
+            return (
+                self._street == other._street
+                and self._city == other._city
+                and self._state == other._state
+                and self._zip == other._zip
+            )
+
 
     def __str__(self):
         """__str method"""
-        raise NotImplementedError
+        return f"{self._street}\n{self._city}, {self._state} {self._zip}"
 
 
 class Customer:
@@ -33,17 +64,35 @@ class Customer:
 
     def __init__(self, name_init: str, dob_init: str, address_init: object):
         """Constructor"""
-        raise NotImplementedError
+        self._name = name_init
+        self._dob = dob_init
+        self._address = address_init
 
     # TODO: Implement data members as properties
 
+    @property
+    def name(self):
+        """Get the name"""
+        return self._name
+
+    @property
+    def dob(self):
+        """Get the dob"""
+        return self._dob
+
+    @property
+    def address(self):
+        """Get the address"""
+        return self._address
+
+
     def move(self, new_address: object):
         """Change address"""
-        raise NotImplementedError
+        self._address = new_address
 
     def __str__(self):
         """__str"""
-        raise NotImplementedError
+        return f"{self._name} ({self._dob})\n{str(self._address)}"
 
 
 class Account(ABC):
@@ -52,21 +101,37 @@ class Account(ABC):
     @abstractmethod
     def __init__(self, owner_init: object, balance_init: float = 0):
         """Constructor"""
-        raise NotImplementedError
+        self._owner = owner_init
+        self._balance = balance_init
 
     # TODO: Implement data members as properties
 
+    @property
+    def owner(self):
+        """Get the owner"""
+        return self._owner
+
+    @property
+    def balance(self):
+        """Get the balance"""
+        return self._balance
+
+
     def deposit(self, amount: float):
         """Add money"""
-        raise NotImplementedError
+        if amount >= 0:
+            self._balance += amount
+        else:
+            raise ValueError("Must deposit positive amount")
 
     def close(self):
         """Close account"""
-        raise NotImplementedError
+        self._balance = 0
+        return round(self._balance, 2)
 
     def __str__(self):
         """__str__"""
-        raise NotImplementedError
+        return f"{self._owner}, {self._balance}"
 
 
 class CheckingAccount(Account):
@@ -74,30 +139,41 @@ class CheckingAccount(Account):
 
     def __init__(self, owner_init: object, fee_init: float, balance_init: float = 0):
         """Constructor"""
-        raise NotImplementedError
+        super().__init__(owner_init, balance_init)
+        self._fee = fee_init
 
     def process_check(self, amount: float):
         """Process a check"""
-        raise NotImplementedError
+        if self._balance >= amount:
+            self._balance = self._balance - amount
+        else:
+            self._balance = self._balance - self._fee
 
     def __str__(self):
         """__str__"""
-        raise NotImplementedError
+        return f"Checking account\nOwner: {self._owner}\nBalance: {self._balance:.2f}"
 
 
 class SavingsAccount(Account):
     """CheckingAccount class"""
 
     def __init__(
-        self, owner_init: object, interest_rate_init: float, balance_init: float = 0
-    ):
+        self, owner_init: object, interest_rate_init: float, balance_init: float = 0):
         """Constructor"""
-        raise NotImplementedError
+        super().__init__(owner_init, balance_init)
+        self._interest_rate = interest_rate_init
+
+    @property
+    def interest_rate(self):
+        """Get the interest rate"""
+        return self._interest_rate
+
 
     def yield_interest(self):
         """Yield annual interest"""
-        raise NotImplementedError
+        self._balance = self._balance * (1 + self._interest_rate / 100)
+
 
     def __str__(self):
         """__str__"""
-        raise NotImplementedError
+        return f"Savings account\nOwner: {self._owner}\nBalance: {self._balance:.2f}"

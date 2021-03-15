@@ -8,7 +8,7 @@ Implement classes Address, Customer, Account, CheckingAccount, and SavingsAccoun
 
 - Implement `__init__` and `__str__` methods.
 
-- Implement all data members as properties.
+- Implement all data members as properties. 
 
 ## Class-specific requirements
 

@@ -4,7 +4,7 @@
 
 2. Describe the details of such solution.
 
-3. Your class organization should match the one in the picture below. There must be an inheritance (e.g. classes *D* and *E* **extend** class *C*) and a composition (i.e. class *A* **has** and object of class *B*, class *C* **has** and object of class *A*).
+3. Your class organization should match the one in the picture below. There must be an inheritance (e.g. classes *D* and *E* **extend** class *C*) and a composition (i.e. class *A* **has** an object of class *B*, class *C* **has** an object of class *A*).
 
 4. Implement your classes and relevant methods in Python.
 
