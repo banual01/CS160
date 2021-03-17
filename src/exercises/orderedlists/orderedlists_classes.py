@@ -55,12 +55,11 @@ class OrderedList:
     def __getitem__(self, position: int):
         """Get item by its position"""
         current = self._head
+        counter = 0
+        while position != counter + 1 and current is not None:
+            counter += 1
+        return current.data
 
-        if position == self._count - 1:
-            return current.data
-
-
-        
         raise NotImplementedError
 
     def __len__(self) -> int:
