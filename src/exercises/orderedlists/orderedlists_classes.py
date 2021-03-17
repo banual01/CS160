@@ -147,4 +147,10 @@ class OrderedList:
 
     def index(self, value: typing.Any) -> int:
         """Return position of an item in the list"""
-        raise NotImplementedError
+        current = self._head
+        index = 0
+        while current is not None:
+            index += 1
+            if current.data == value:
+                return index
+
