@@ -54,11 +54,16 @@ class OrderedList:
 
     def __getitem__(self, position: int):
         """Get item by its position"""
-        current = self._head
-        counter = 0
-        while position != counter + 1 and current is not None:
-            counter += 1
-        return current.data
+        # current = self._head
+        # idx = 0
+        # while position <= self._count:
+        #     for idx in len(self._count):
+        #         if position == idx:
+        #             return current.data
+        #         else:
+        #             current.next
+        #             idx += 1
+            
 
         raise NotImplementedError
 
@@ -109,7 +114,16 @@ class OrderedList:
         Raise ValueError if the list is empty
         Raise IndexError if the provided position is negative        
         """
-        raise NotImplementedError
+        if position == self._count:
+            current = self._head
+            while current.next is not None:
+                current = current.next
+            curent = None
+        elif position == 0:
+            self._head = self._head.next
+        elif self._head is None:
+            return ValueError("Cannot pop from an empty list")
+
 
     def append(self, value: typing.Any) -> None:
         """Add a new item to the end of the list"""
