@@ -1,6 +1,4 @@
 {
- <<<<<<< HEAD
-=======
   "python.pythonPath": ".venv/bin/python",
   "python.testing.pytestArgs": ["tests"],
   "python.testing.unittestEnabled": false,
@@ -9,4 +7,4 @@
   "python.formatting.provider": "black",
   "python.analysis.extraPaths": ["src/exercises/recursion"]
 }
->>>>>>> cc3422c50a7075c383e651f00033ea4c2f07f7c2
+
