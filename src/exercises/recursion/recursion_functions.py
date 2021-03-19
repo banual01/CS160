@@ -15,7 +15,9 @@ def gcd(a: int, b: int) -> int:
 
 def diamond_ite(levels: int) -> None:
     """Print a diamond"""
-    raise NotImplementedError
+    for level in levels:
+
+        raise NotImplementedError 
 
 
 def diamond_rec(levels: int) -> None:
@@ -25,7 +27,8 @@ def diamond_rec(levels: int) -> None:
 
 def hourglass_ite(levels: int) -> None:
     """Print an hourglass"""
-    raise NotImplementedError
+    for level in levels:
+        raise NotImplementedError 
 
 
 def hourglass_rec(levels: int) -> None:
