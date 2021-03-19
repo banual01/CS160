@@ -8,7 +8,9 @@
 
 def gcd(a: int, b: int) -> int:
     """Greatest Common Denominator"""
-    raise NotImplementedError
+    while a % b:
+        a, b = b, a % b
+    return b
 
 
 def diamond_ite(levels: int) -> None:
