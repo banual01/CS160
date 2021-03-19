@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
 customproblem classes
+
+Alexander Banuelos
 """
 
 from abc import ABC, abstractmethod
+import random
 
 
 class Car:
     """Car class"""
 
-    def __init__(self, carname_init, size_init, speed_init):
+    def __init__(self, carname_init: str, size_init: str, speed_init: float):
         """__init__"""
         self._carname = carname_init
         self._size = size_init
@@ -17,6 +20,10 @@ class Car:
 
 
     # TODO: Implement data members as properties
+    @property
+    def car_name(self):
+        """Get the car's name"""
+        return self._carname
 
     @property
     def size(self):
@@ -28,11 +35,6 @@ class Car:
         """Get the speed"""
         return self._speed
 
-    @property
-    def car_name(self):
-        """Get the car's name"""
-        return self._carname
-
     def __eq__(self, other: object):
         """Compare 2 Cars"""
         if isinstance(other, Car):    
@@ -42,10 +44,10 @@ class Car:
                 and self._carname == other._carname
             )
 
-    def sizespeedratio(self, size:float, speed:float):
+    def sizeSpeedRatio(self, size:float, speed:float):
         ratio = size / speed
 
-    def speedbracket(self):
+    def speedBracket(self):
         if 0 < speed <= 20:
             return "This is a slow car"
         elif speed > 20:
@@ -60,11 +62,12 @@ class Car:
 class Player:
     """Player class"""
 
-    def __init__(self, name_init, cars_init, inventory_init):
+    def __init__(self, name_init, cars_init, inventory_init, won_init):
         """Constructor"""
         self._name = name_init
         self._cars = cars_init
         self._inventory = inventory_init
+        self._won = won_init
 
     # TODO: Implement data members as properties
 
@@ -83,8 +86,22 @@ class Player:
         """Get the inventory"""
         return self._inventory
 
-    def startinventoryspace(self):
-        self._inventory = 0
+    @property
+    def won(self):
+        """Get the number of won matches"""
+        return self._won
+
+    def startInventorySpace(self):
+        self._inventory = {"Tournament": 0, "Ranking": []}
+
+    def addItem(self, mode, item):
+        self._inventory[mode].append(item)
+
+    def gameResult(self, result):
+        if result == "Lose":
+            self._won -= 1
+        elif result == "Win":
+            self._won += 1
 
     def __str__(self):
         """__str"""
@@ -95,12 +112,12 @@ class GameMode(ABC):
     """Game Mode class"""
 
     @abstractmethod
-    def __init__(self, player_init, stadium_init, rank_init):
+    def __init__(self, player_init, stadium_init, result_init):
         """Constructor"""
         self._player = player_init
         self._stadium = stadium_init
-        self._rank = rank_init
-
+        self._rank = ""
+        self._result = result_init
 
     # TODO: Implement data members as properties
 
@@ -108,6 +125,11 @@ class GameMode(ABC):
     def player(self):
         """Get the player"""
         return self._player
+
+    @property
+    def result(self):
+        """Get the game result"""
+        return self._result
 
     @property
     def stadium(self):
@@ -119,12 +141,13 @@ class GameMode(ABC):
         """Get the rank"""
         return self._rank
 
-    # def ranksystem(self, unranked:int, win:dictionary):
-    #     for 
-
-    # def prevstadium(self, other:object):
-    #     while self._stadium == other._stadium:
-
+    def rankChange(self):
+        if self._player.won() < 50:
+            self._rank = "Bronze"
+        elif 50 <= self._player.won() < 100:
+            self._rank = "Silver"
+        else:
+            self._rank = "Gold"
 
     def __str__(self):
         """__str__"""
@@ -139,17 +162,18 @@ class RankMode:
         super().__init__(player_init, stadium_init, rank_init)
         self._drop = drop_init
 
-
     @property
     def drop_item(self):
         """Get the drop item"""
         return self._drop
 
-    # def dropsystem(self, win:dictionary):
-    #     for
+    def dropSystem(self):
+        items = ["Costume", "Money", "Wheels", "Boost"]
+        if self._result == "Win":
+            self.player.inventory["Ranking"].append(random.choice(items))
 
-    def partyrankaver(self, other:object, partysize:int):
-        totalparty_rank = self._rank + other._rank
+    def partyRankAver(self, other:object, partysize:int):
+        totalparty_rank = self._won + other._won
         return totalparty_rank / partysize
 
 
@@ -166,7 +190,6 @@ class TournyMode:
         super().__init__(player_init, stadium_init, rank_init)
         self._credits = credits_init
 
-
     @property
     def credits(self):
         """Get the credits"""
@@ -181,14 +204,16 @@ class TournyMode:
         else:
             raise ValueError("Not in the same tourny bracket")
 
-    def tradecredits(self, creditsbracket:int):
+    def dropCredit(self):
+        if self._result == "Win":
+            self.player.inventory["Tournament"] += 50
+
+    def tradeCredits(self, creditsbracket:int):
+        # self._credits = self.player.inventory.get("Tournament")
         if self._credits >= creditsbracket:
-            self._credits = self._credits - creditsbracket
+            self._credits -= creditsbracket
         else:
             raise ValueError("Not enough credits to be traded in for an item")
-    
-    # def creditsgain(self, addcredits:int, win:dictionary):
-    #     for
 
 
     def __str__(self):

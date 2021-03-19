@@ -20,14 +20,17 @@ finally:
 
 car_attributes = "carname, size, speed"
 cars = [
-    ("Octane", 34, 52.5),
-    ("Merc", 272, 28.9)
+    ("Octane", "Medium", 52.5),
+    ("Merc", "Big", 28.9)
 ]
 player_attributes = "name, cars, inventory, won"
+
+
 players = [
-    ("John Doe", Car(*cars[0]), {"Tournament": 0, "Ranking": []}, 30),
-    ("Jane Doe", Car(*cars[1]), {"Tournament": 0, "Ranking": []}, 40)
+    ("John Doe", Car(*cars[0]), 10, 30),
+    ("Jane Doe", Car(*cars[1]), 39, 40)
 ]
+
 gamemode_attributes = "player, stadium, result"
 gamemodes = [
     (Player(*players[0]), "AquaDome", "Win"),
@@ -40,9 +43,10 @@ rankmodes = [
 ]
 tournymode_attributes = "credits, player, stadium, rank"
 tournymodes = [
-    (3058, Player(*players[0]), "Beckwith Park", "Gold"),
+    (340058, Player(*players[0]), "Beckwith Park", "Gold"),
     (8932543, Player(*players[1]), "Neo Tokyo", "Silver")
 ]
+
 
 
 
@@ -52,53 +56,61 @@ class TestCustomProblemMethods:
     @pytest.fixture(scope="function", autouse=True)
     def setup_class(self):
         """Setting up"""
-        
+        pass
+    
 
-
-    def test_sizeSpeedRatio(self, size, speed):
+    @pytest.mark.parametrize(car_attributes, cars)
+    def test_sizespeedratio(self, carname, size, speed):
         """Testing sizespeedratio method"""
-        assert Car.ratio == pytest.approx(size/speed, 0.01)
+        car = Car(self._carname, size, speed)
+        car.sizespeedratio(carname, size, speed)
+        assert car.ratio == pytest.approx(size / speed, 0.01)
 
     # @pytest.mark.parametrize(car_attributes, cars)
-    # def test_speedBracket(self):
-    #     """Testing speedBracket method"""
+    # def test_speedbracket(self):
+    #     """Testing speedbracket method"""
+    #     car = Car(self._carname, self._size, self._speed)
+    #     car.speedbracket(speed)
     #     assert car.speedbracket ==
 
-
-    def test_startInventorySpace(self):
+    @pytest.mark.parametrize(player_attributes, players)
+    def test_startinventoryspace(self):
         """Testing startinventoryspace method"""
-        assert Player.startInventorySpace == {"Tournament": 0, "Ranking": []}
+        assert Car.startinventoryspace == 0
 
     
-    def test_gameResult(self):
-        """Testing gameresult method"""
+    def test_d(self):
+        """Testing something"""
         pass
-
-
-    def test_rankChange(self):
+    
+    @pytest.mark.parametrize(gamemode_attributes, gamemodes)
+    def test_ranksystem(self):
         """Testing ranksystem method"""
         pass
 
-
-    def test_addItem(self):
-        """Testing additem method"""
+    @pytest.mark.parametrize(gamemode_attributes, gamemodes)
+    def test_prevstadium(self):
+        """Testing prevstadium method"""
         pass
 
-
-    def test_dropSystem(self):
+    @pytest.mark.parametrize(rankmode_attributes, rankmodes)
+    def test_dropsystem(self):
         """Testing dropsystem"""
         pass
 
-
-    def test_partyRankAver(self, other:object, partysize:int):
+    @pytest.mark.parametrize(rankmode_attributes, rankmodes)
+    def test_partyrankaver(self, other:object, partysize:int):
         """Testing partyrankaver"""
+        partysize = 2
+        rankmode = RankMode(self._drop, self._player, self._stadium, self._rank)
+        rankmode.partyrankaver(partysize) 
         assert rankmodes.rank == pytest.approx(self._rank + other._rank / partysize, 0.01)
 
-
-    def test_tradeCredits(self):
+    @pytest.mark.parametrize(tournymode_attributes, tournymodes)
+    def test_tradecredits(self):
         """Testing tradecredits"""
         creditsbracket = 303453
-        tournymodes.tradeCredits(creditsbracket)
+        tournymodes.tradecredits(creditsbracket)
         assert tournymodes.credits == pytest.approx(
             credits - creditsbracket
             if credits >= creditsbracket
@@ -106,12 +118,12 @@ class TestCustomProblemMethods:
             0.01,
         )
         with pytest.raises(ValueError) as excinfo:
-            tournymodes.tradeCredits(creditsbracket)
+            tournymodes.tradecredits(creditsbracket)
         exception_msg = excinfo.value.args[0]
         assert exception_msg == "Not enough credits to be traded in for an item"
 
-
-    def test_dropCredit(self):
+    @pytest.mark.parametrize(tournymode_attributes, tournymodes)
+    def test_creditsgain(self):
         """Testing creditsgain"""
         pass
 

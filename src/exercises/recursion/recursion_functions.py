@@ -1,38 +1,48 @@
 #!/usr/bin/env python3
 """
-Exercise `recursion` implementation
+`recursion` implementation
 
-@authors:
+@author:
 """
 
 
 def gcd(a: int, b: int) -> int:
+    """Greatest Common Denominator"""
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a%b)
+
+
+def diamond_ite(levels: int) -> None:
+    """Print a diamond"""
+    duoStarNum= 1
+    duoLevels = 2 * levels - 1
+    while duoStarNum < duoLevels:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum += 2
+    while duoStarNum > 0:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum -= 2 
+
+
+def diamond_rec(levels: int) -> None:
+    """Print a diamond"""
     raise NotImplementedError
 
 
 def hourglass_ite(levels: int) -> None:
-    raise NotImplementedError
-
-
-def diamond_ite(levels: int) -> None:
-    raise NotImplementedError
+    """Print an hourglass"""
+    duoStarNum= 2 * levels - 1
+    duoLevels = 2 * levels - 1
+    while duoStarNum > 1:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum -= 2 
+    while duoStarNum <= duoLevels:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum += 2
 
 
 def hourglass_rec(levels: int) -> None:
+    """Print an hourglass"""
     raise NotImplementedError
-
-
-def diamond_rec(levels: int) -> None:
-    raise NotImplementedError
-
-
-def main():
-    """Main function"""
-    hourglass_ite(5)
-    hourglass_rec(5)
-    diamond_ite(5)
-    diamond_rec(5)
-
-
-if __name__ == "__main__":
-    main()

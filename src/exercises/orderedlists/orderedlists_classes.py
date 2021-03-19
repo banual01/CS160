@@ -2,7 +2,7 @@
 """
 Exercise `orderedlists` implementation
 
-@authors:
+@authors:Alexander Banuelos
 """
 
 import random
@@ -54,7 +54,19 @@ class OrderedList:
 
     def __getitem__(self, position: int):
         """Get item by its position"""
-        raise NotImplementedError
+        if self.is_empty():
+            raise ValueError("The list is empty")
+        
+        current = self._head
+        idx = 0
+        while idx <= position:
+            if idx == self._count-1:
+                return current.data
+            if position == idx:
+                return current.data
+            else:
+                current = current.next
+                idx += 1
 
     def __len__(self) -> int:
         """Get list size"""
@@ -79,7 +91,22 @@ class OrderedList:
 
     def add(self, value: typing.Any) -> None:
         """Add a new item to the list"""
-        raise NotImplementedError
+        """Code from textbook"""
+        current = self._head
+        previous = None
+
+        while current is not None and current.data < value:
+            previous = current
+            current = current.next
+        temp = Node(value)
+
+        if previous is None:
+            temp.next = self._head
+            self._head = temp
+        else:
+            temp.next = current
+            previous.next = temp
+        self._count += 1
 
     def pop(self, position: int = None):
         """
@@ -89,15 +116,36 @@ class OrderedList:
         Raise ValueError if the list is empty
         Raise IndexError if the provided position is negative        
         """
-        raise NotImplementedError
+        """code talked in class"""
+        previous = None
+        current = self._head
+        counter = 0
+        remove_data = None
+        if position is None:
+            position = self._count
+        if current == None:
+            raise ValueError("Cannot pop from an empty list")
+        if position < 0:
+            raise IndexError("Invalid position for popping an item")
+        while current.next is not None and counter < position:
+            previous = current
+            current = current.next
+            counter += 1
+        remove_data = current.data 
+        if previous is None:
+            self._head = current.next
+        else:
+            previous.next = None
+        self._count -= 1     
+        return remove_data
 
     def append(self, value: typing.Any) -> None:
         """Add a new item to the end of the list"""
-        raise NotImplementedError
+        return self.add(value)
 
     def insert(self, position: int, value: typing.Any) -> None:
         """Insert a new item into the list"""
-        raise NotImplementedError
+        return self.add(value)
 
     def search(self, value: typing.Any) -> bool:
         """Search for an item in the list"""
@@ -112,4 +160,17 @@ class OrderedList:
 
     def index(self, value: typing.Any) -> int:
         """Return position of an item in the list"""
-        raise NotImplementedError
+        if self.is_empty():
+            return -1
+        current = self._head
+        index = 0
+        if current.data == value:
+            return index
+        while current is not None:
+            index += 1
+            current = current.next
+            if current == None:
+                return -1
+            elif current.data == value:
+                return index
+
