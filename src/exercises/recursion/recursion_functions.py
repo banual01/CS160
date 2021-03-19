@@ -8,16 +8,22 @@
 
 def gcd(a: int, b: int) -> int:
     """Greatest Common Denominator"""
-    while a % b:
-        a, b = b, a % b
-    return b
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a%b)
 
 
 def diamond_ite(levels: int) -> None:
     """Print a diamond"""
-    for level in levels:
-
-        raise NotImplementedError 
+    duoStarNum= 1
+    duoLevels = 2 * levels - 1
+    while duoStarNum < duoLevels:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum += 2
+    while duoStarNum > 0:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum -= 2 
 
 
 def diamond_rec(levels: int) -> None:
@@ -27,8 +33,14 @@ def diamond_rec(levels: int) -> None:
 
 def hourglass_ite(levels: int) -> None:
     """Print an hourglass"""
-    for level in levels:
-        raise NotImplementedError 
+    duoStarNum= 2 * levels - 1
+    duoLevels = 2 * levels - 1
+    while duoStarNum > 1:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum -= 2 
+    while duoStarNum <= duoLevels:
+        print('{:{align}{width}}'.format('*'*duoStarNum, align='^', width=(duoLevels)))
+        duoStarNum += 2
 
 
 def hourglass_rec(levels: int) -> None:
