@@ -28,7 +28,16 @@ def diamond_ite(levels: int) -> None:
 
 def diamond_rec(levels: int) -> None:
     """Print a diamond"""
-    raise NotImplementedError
+    maxWidth = 2 * levels - 1
+    curDuoLevels = 2 * levels - 1
+    exStarNum = 1
+    if curDuoLevels != maxWidth:
+        exStarNum += 2
+        curDuoLevels += 1
+    else:
+        print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+    while exStarNum < curDuoLevels:
+        return diamond_rec(levels-1)
 
 
 def hourglass_ite(levels: int) -> None:
