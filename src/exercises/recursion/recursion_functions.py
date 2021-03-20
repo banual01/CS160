@@ -26,18 +26,24 @@ def diamond_ite(levels: int) -> None:
         duoStarNum -= 2 
 
 
+def topDiamond_rec(exStarNum, curDuoLevels):
+    while exStarNum < curDuoLevels:
+        print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+        return topDiamond_rec(exStarNum+2, curDuoLevels)
+
+
+# def botDiamond_rec(exStarNum, curDuoLevels):
+#     while exStarNum > 0:
+#         print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+#         return botDiamond_rec(exStarNum-2, curDuoLevels)
+
+
 def diamond_rec(levels: int) -> None:
     """Print a diamond"""
-    maxWidth = 2 * levels - 1
     curDuoLevels = 2 * levels - 1
     exStarNum = 1
-    if curDuoLevels != maxWidth:
-        exStarNum += 2
-        curDuoLevels += 1
-    else:
-        print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
-    while exStarNum < curDuoLevels:
-        return diamond_rec(levels-1)
+    return topDiamond_rec(exStarNum, curDuoLevels)
+        
 
 
 def hourglass_ite(levels: int) -> None:
