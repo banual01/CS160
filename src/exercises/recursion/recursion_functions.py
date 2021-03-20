@@ -27,16 +27,19 @@ def diamond_ite(levels: int) -> None:
 
 
 def topDiamond_rec(exStarNum, curDuoLevels):
-    while exStarNum < curDuoLevels:
+    while exStarNum <= curDuoLevels:
         print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+        if exStarNum == curDuoLevels :
+            return botDiamond_rec(exStarNum, curDuoLevels)
         return topDiamond_rec(exStarNum+2, curDuoLevels)
 
 
-# def botDiamond_rec(exStarNum, curDuoLevels):
-#     while exStarNum > 0:
-#         print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
-#         return botDiamond_rec(exStarNum-2, curDuoLevels)
-
+def botDiamond_rec(exStarNum, curDuoLevels):
+    while exStarNum >= 0:
+        if exStarNum == curDuoLevels:
+            return botDiamond_rec(exStarNum-2, curDuoLevels)
+        print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+        return botDiamond_rec(exStarNum-2, curDuoLevels)
 
 def diamond_rec(levels: int) -> None:
     """Print a diamond"""
@@ -58,6 +61,24 @@ def hourglass_ite(levels: int) -> None:
         duoStarNum += 2
 
 
+def topHourglass_rec(exStarNum, curDuoLevels):
+    while exStarNum >= 0:
+        print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+        if exStarNum == 1 :
+            return botHourglass_rec(exStarNum, curDuoLevels)
+        return topHourglass_rec(exStarNum-2, curDuoLevels)
+
+
+def botHourglass_rec(exStarNum, curDuoLevels):
+    while exStarNum <= curDuoLevels:
+        if exStarNum == 1:
+            return botHourglass_rec(exStarNum+2, curDuoLevels)
+        print('{:{align}{width}}'.format('*'*exStarNum, align='^', width=(curDuoLevels)))
+        return botHourglass_rec(exStarNum+2, curDuoLevels)
+
+
 def hourglass_rec(levels: int) -> None:
     """Print an hourglass"""
-    raise NotImplementedError
+    curDuoLevels = 2 * levels -1
+    exStarNum = curDuoLevels
+    return topHourglass_rec(exStarNum, curDuoLevels)
