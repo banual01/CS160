@@ -8,12 +8,18 @@ Exercise `hashing` implementation
 
 def hash_remainder(key: int, size: int) -> int:
     """Find hash using remainder"""
-    raise NotImplementedError
+    return key%size
 
 
 def hash_mid_sqr(key: int, size: int) -> int:
     """Find hash using mid-square method"""
-    raise NotImplementedError
+    
+    squared = key * key
+    string = str(squared)
+    if len(string)%2 != 0:
+        return int(string[int(len(string)/2-1.5):int((len(string)/2)+0.5)])%size
+    else:
+        return int(string[int(len(string)/2-1):int((len(string)/2)+1)])%size
 
 
 def hash_folding(key: int, size: int) -> int:
