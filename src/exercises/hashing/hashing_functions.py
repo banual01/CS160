@@ -36,7 +36,6 @@ def hash_folding(key: int, size: int) -> int:
         num += 1
     keyList.pop()
     keyList.pop()
-    print(keyList)
     num2 = 0
     total = 0
     for index in keyList:
