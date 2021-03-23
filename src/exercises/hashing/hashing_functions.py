@@ -49,7 +49,6 @@ def hash_folding(key: int, size: int) -> int:
 
 def hash_str(key: str, size: int) -> int:
     """Find string hash using simple sum-of-values method"""
-    print(key)
     total = 0
     for index in key:
         total += ord(index)
@@ -58,5 +57,11 @@ def hash_str(key: str, size: int) -> int:
 
 def hash_str_weighted(key: str, size: int) -> int:
     """Find string hash using character positions as weights"""
-    raise NotImplementedError
+    print(key)
+    num = 0
+    total = 0
+    for index in key:
+        total += ord(index) * num
+        num += 1
+    return total%size
 
