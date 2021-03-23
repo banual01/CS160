@@ -24,7 +24,28 @@ def hash_mid_sqr(key: int, size: int) -> int:
 
 def hash_folding(key: int, size: int) -> int:
     """Find hash using folding method"""
-    raise NotImplementedError
+    keyList = []
+    num = 0
+    for index in key:
+        if len(key) == num:
+            num = 0
+        if key[num] == "-":
+            num += 1
+        if num < len(key):
+            keyList.append(key[num])
+        num += 1
+    keyList.pop()
+    keyList.pop()
+    print(keyList)
+    num2 = 0
+    total = 0
+    for index in keyList:
+        if num2%2 != 0:
+            total += int(keyList[num2-1] + keyList[num2])
+        num2 +=1
+    return total%size
+        
+        
 
 
 def hash_str(key: str, size: int) -> int:
