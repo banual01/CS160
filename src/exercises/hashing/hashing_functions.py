@@ -2,7 +2,7 @@
 """
 Exercise `hashing` implementation
 
-@author:
+@author:Alexander Banuelos
 """
 
 
