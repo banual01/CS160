@@ -57,7 +57,6 @@ def hash_str(key: str, size: int) -> int:
 
 def hash_str_weighted(key: str, size: int) -> int:
     """Find string hash using character positions as weights"""
-    print(key)
     num = 0
     total = 0
     for index in key:
