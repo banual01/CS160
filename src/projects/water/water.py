@@ -14,7 +14,8 @@ class State:
 
     def __init__(self, jug_1: int, jug_2: int):
         """__init__"""
-        raise NotImplementedError
+        self.jug_1 = jug_1
+        self.jug_2 = jug_2
 
     def __eq__(self, other: object) -> bool:
         """__eq__"""
