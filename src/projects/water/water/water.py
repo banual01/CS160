@@ -2,7 +2,7 @@
 """
 `water` implementation
 
-@authors:
+@authors: Alexander Banuelos
 """
 
 JUG_1_MAX = 5
@@ -80,11 +80,6 @@ class State:
             self.jug_1 += self.jug_2
             self.jug_2 -= self.jug_2
 
-def maxj1_0j2(comapreState):
-    return comapreState.fill_jug_2()
-
-
-
 def search(start_state: State, goal: State, moves_lst: list):
     """Find a sequence of states"""
     newMoves = []
@@ -123,10 +118,5 @@ def search(start_state: State, goal: State, moves_lst: list):
         checkIn(compareState6)
 
     uniqueMove = [m for m in newMoves if m not in moves_lst]
-    # lambda expression: 4 lines = 1 line
-    # uniqueMove = []
-    # for m in newMoves:
-    #     if m not in moves_lst:
-    #         uniqueMove.append(m)
     for move in uniqueMove:
-        return search(move, goal, moves_lst)          
+        return search(move, goal, moves_lst)
