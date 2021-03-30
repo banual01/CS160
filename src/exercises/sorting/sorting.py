@@ -1,6 +1,4 @@
 def selection_sort(a_list):
-    print("Original list: " + str(a_list))
-    print()
     print("Selection sort by min")
     for i, item in enumerate(a_list):
         min_idx = len(a_list) - 1
@@ -11,11 +9,11 @@ def selection_sort(a_list):
             a_list[min_idx], a_list[i] = a_list[i], a_list[min_idx]
         print("Step: " + str(i+1))
         print(a_list)
+    print("Finalized sorted list")
+    print(a_list)
 
 
 def insertion_sort(a_list):
-    print("Original list: " + str(a_list))
-    print()
     print("Insertion sort")
     for i in range(1, len(a_list)):
         cur_val = a_list[i]
@@ -27,11 +25,11 @@ def insertion_sort(a_list):
         a_list[cur_pos] = cur_val
         print("Step: " + str(i))
         print(a_list)
+    print("Finalized sorted list")
+    print(a_list)
 
 
 def quick_sort(a_list):
-    print("Original list: " + str(a_list))
-    print()
     print("Quick sort")
     quick_sort_helper(a_list, 0, len(a_list) - 1)
 
@@ -96,10 +94,13 @@ def merge_sort(a_list):
             k = k + 1
     print("Merging", a_list)
 
+
+print("Original list: " + str([15, 16, 73, 65, 38, 10, 22, 79, 87, 64]))
+print()
 selection_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
 print()
 insertion_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
 print()
 quick_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
-# print()
-# merge_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
+print()
+merge_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
