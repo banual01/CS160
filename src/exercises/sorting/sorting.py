@@ -1,4 +1,7 @@
 def selection_sort(a_list):
+    print("Original list: " + str(a_list))
+    print()
+    print("Selection sort by min")
     for i, item in enumerate(a_list):
         min_idx = len(a_list) - 1
         for j in range(i, len(a_list)):
@@ -6,10 +9,14 @@ def selection_sort(a_list):
                 min_idx = j
         if min_idx != i:
             a_list[min_idx], a_list[i] = a_list[i], a_list[min_idx]
+        print("Step: " + str(i+1))
         print(a_list)
 
 
 def insertion_sort(a_list):
+    print("Original list: " + str(a_list))
+    print()
+    print("Insertion sort")
     for i in range(1, len(a_list)):
         cur_val = a_list[i]
         cur_pos = i
@@ -18,10 +25,14 @@ def insertion_sort(a_list):
             a_list[cur_pos] = a_list[cur_pos - 1]
             cur_pos = cur_pos - 1
         a_list[cur_pos] = cur_val
+        print("Step: " + str(i))
         print(a_list)
 
 
 def quick_sort(a_list):
+    print("Original list: " + str(a_list))
+    print()
+    print("Quick sort")
     quick_sort_helper(a_list, 0, len(a_list) - 1)
 
 
@@ -30,7 +41,7 @@ def quick_sort_helper(a_list, first, last):
         split = partition(a_list, first, last)
         quick_sort_helper(a_list, first, split - 1)
         quick_sort_helper(a_list, split + 1, last)
-
+    print(a_list)   
 
 def partition(a_list, first, last):
     pivot_val = a_list[first]
@@ -51,7 +62,6 @@ def partition(a_list, first, last):
                 a_list[left_mark],
             )
     a_list[first], a_list[right_mark] = a_list[right_mark], a_list[first]
-    print(a_list)   
     return right_mark
 
 
@@ -88,8 +98,8 @@ def merge_sort(a_list):
 
 selection_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
 print()
-# insertion_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
-# print()
-# quick_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
+insertion_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
+print()
+quick_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
 # print()
 # merge_sort([15, 16, 73, 65, 38, 10, 22, 79, 87, 64])
