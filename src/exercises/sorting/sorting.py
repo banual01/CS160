@@ -1,3 +1,4 @@
+"""Definition codes from textbook"""
 def selection_sort(a_list):
     print("Selection sort by min")
     for i, item in enumerate(a_list):
