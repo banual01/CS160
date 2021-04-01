@@ -80,7 +80,7 @@ class HashMap:
 
         @return collections as a string
         """
-        raise NotImplementedError
+        return self
 
     def _hash(self, key: int) -> int:
         """
