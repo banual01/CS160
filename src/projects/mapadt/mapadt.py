@@ -40,7 +40,7 @@ class HashMap:
         """
         """code from textbook"""
         
-        hash_value = self._hash(key, len(self.keys))
+        hash_value = self._hash(key, self._size)
 
         if self.keys[hash_value] is None:
             self.keys[hash_value] = key
@@ -49,12 +49,12 @@ class HashMap:
             if self.keys[hash_value] == key:
                 self.value[hash_value] = value  # replace
             else:
-                next_slot = self._rehash(hash_value, len(self.keys))
+                next_slot = self._rehash(hash_value, self._size)
                 while (
                     self.keys[next_slot] is not None
                     and self.keys[next_slot] != key
                 ):
-                    next_slot = self._rehash(next_slot, len(self.keys))
+                    next_slot = self._rehash(next_slot, self._size)
 
                 if self.keys[next_slot] is None:
                     self.keys[next_slot] = key
@@ -102,7 +102,14 @@ class HashMap:
 
         @return collections as a string
         """
-        return f"{self._keys}:{self._values}"
+        strDict = {}
+        for index1 in self._keys:
+            for index2 in self._values:
+                if index1 == index2:
+                    strDict[index1] = index2
+        if None in strDict:
+            return "{}"
+        return f"{strDict}"
 
     def _hash(self, key: int) -> int:
         """
