@@ -84,7 +84,9 @@ class HashMap:
 
         @return a number of key-value pairs stored in the collection
         """
-        raise NotImplementedError
+        if None in self._keys:
+            return 0
+        return self._size
 
     def __contains__(self, key: int) -> bool:
         """
@@ -137,7 +139,9 @@ class HashMap:
 
         @return all keys
         """
-        raise NotImplementedError
+        if None in self._keys:
+            return []        
+        return self._keys
 
     def values(self) -> List[Any]:
         """
@@ -145,7 +149,9 @@ class HashMap:
 
         @return all values
         """
-        raise NotImplementedError
+        if None in self._values:
+            return []
+        return self._values
 
     def items(self) -> List[Tuple[int, Any]]:
         """
@@ -153,4 +159,11 @@ class HashMap:
 
         @return all items
         """
-        raise NotImplementedError
+        tupList = []
+        for index1 in self._keys:
+            for index2 in self._values:
+                if index1 == index2:
+                    tupList.append((index1, index2))
+        if index1 == None and index2 == None:
+            return []
+        return f"{tupList}"
