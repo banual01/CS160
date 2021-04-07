@@ -38,41 +38,17 @@ class HashMap:
         @param key: key of the item in the collection
         @param value: new value to be added to (updated in) the collection
         """
-        """code from textbook"""
+        if not None in self._keys:
+            raise MemoryError("Hash Table is full")
+        hash_value = self._hash(key)
+        first_hash = hash_value
+        count = 1
+        while self._keys[hash_value] is not None and self._keys[hash_value] != key:
+            hash_value = self._rehash(first_hash, count)
+            count +=1
         
-        # hash_value = self._hash(key)
-
-        # if self._keys[hash_value] is None:
-        #     self._keys[hash_value] = key
-        #     self._values[hash_value] = value
-        # else:
-        #     if self._keys[hash_value] == key:
-        #         self._values[hash_value] = value  # replace
-        #     else:
-        #         next_slot = self._rehash(hash_value)
-        #         while (
-        #             self._keys[next_slot] is not None
-        #             and self._keys[next_slot] != key
-        #         ):
-        #             next_slot = self._rehash(next_slot)
-
-        #         if self._keys[next_slot] is None:
-        #             self._keys[next_slot] = key
-        #             self._values[next_slot] = value
-        #         else:
-        #             self._values[next_slot] = value
-
-        # if not None in self._keys:
-        #     raise MemoryError("Hash Table is full")
-        # hash_value = self._hash(key)
-        # first_hash = hash_value
-        # count = 1
-        # while self._keys[hash_value] is not None and self._keys[hash_value] != key:
-        #     hash_value = self._rehash(first_hash, count)
-        #     count +=1
-        
-        # self._keys[hash_value] = key
-        # self._values[hash_value] = value
+        self._keys[hash_value] = key
+        self._values[hash_value] = value
 
 
     def __getitem__(self, key: int) -> Any:
@@ -89,7 +65,16 @@ class HashMap:
 
         @param key: key of the new item in the collection
         """
-        return self._keys
+        start_slot = self._hash(key)
+
+        position = start_slot
+        while self._keys[position] is not None:
+            if self._keys[position] == key:
+                return self._values[position]
+            else:
+                position = self._rehash(position)
+                if position == start_slot:
+                    return None
 
     def __len__(self) -> int:
         """
@@ -97,9 +82,7 @@ class HashMap:
 
         @return a number of key-value pairs stored in the collection
         """
-        if None in self._keys:
-            return 0
-        return self._size
+        return len(self.keys())
 
     def __contains__(self, key: int) -> bool:
         """
@@ -109,7 +92,9 @@ class HashMap:
         @param key: key of an item in the collection
         @return True if the key is found, False otherwise
         """
-        raise NotImplementedError
+        if key in self._keys:
+            return True
+        return False
 
     def __str__(self) -> str:
         """
@@ -118,12 +103,10 @@ class HashMap:
         @return collections as a string
         """
         strDict = {}
-        for index1 in self._keys:
-            for index2 in self._values:
-                if index1 == index2:
-                    strDict[index1] = index2
-        if None in strDict:
-            return "{}"
+        kList = self.keys()
+        vList = self.values()
+        for index1 in range(len(kList)):
+            strDict[kList[index1]] = vList[index1]
         return f"{strDict}"
 
     def _hash(self, key: int) -> int:
@@ -152,9 +135,11 @@ class HashMap:
 
         @return all keys
         """
-        if None in self._keys:
-            return []        
-        return self._keys
+        kList = []
+        for index1 in self._keys:
+            if index1 != None:
+                kList.append(index1)
+        return kList
 
     def values(self) -> List[Any]:
         """
@@ -162,9 +147,11 @@ class HashMap:
 
         @return all values
         """
-        if None in self._values:
-            return []
-        return self._values
+        vList = []
+        for index2 in self._values:
+            if index2 != None:
+                vList.append(index2)
+        return vList
 
     def items(self) -> List[Tuple[int, Any]]:
         """
@@ -173,10 +160,8 @@ class HashMap:
         @return all items
         """
         tupList = []
-        for index1 in self._keys:
-            for index2 in self._values:
-                if index1 == index2:
-                    tupList.append((index1, index2))
-        if index1 == None and index2 == None:
-            return []
-        return f"{tupList}"
+        kList = self.keys()
+        vList = self.values()
+        for index1 in range(len(kList)):
+            tupList.append((kList[index1], vList[index1]))
+        return tupList
