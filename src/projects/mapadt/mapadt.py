@@ -29,7 +29,7 @@ class HashMap:
         @param key: key of the item in the collection
         @param value: new value to be added to (updated in) the collection
         """
-        raise NotImplementedError
+        self.put(key, value)
 
     def put(self, key: int, value: Any) -> None:
         """
@@ -38,7 +38,29 @@ class HashMap:
         @param key: key of the item in the collection
         @param value: new value to be added to (updated in) the collection
         """
-        raise NotImplementedError
+        """code from textbook"""
+        
+        hash_value = self._hash(key, len(self.keys))
+
+        if self.keys[hash_value] is None:
+            self.keys[hash_value] = key
+            self.value[hash_value] = value
+        else:
+            if self.keys[hash_value] == key:
+                self.value[hash_value] = value  # replace
+            else:
+                next_slot = self._rehash(hash_value, len(self.keys))
+                while (
+                    self.keys[next_slot] is not None
+                    and self.keys[next_slot] != key
+                ):
+                    next_slot = self._rehash(next_slot, len(self.keys))
+
+                if self.keys[next_slot] is None:
+                    self.keys[next_slot] = key
+                    self.value[next_slot] = value
+                else:
+                    self.value[next_slot] = value
 
     def __getitem__(self, key: int) -> Any:
         """
@@ -46,7 +68,7 @@ class HashMap:
 
         @param key: key of the new item in the collection
         """
-        raise NotImplementedError
+        return self.get(key)
 
     def get(self, key: int) -> Any:
         """
@@ -54,7 +76,7 @@ class HashMap:
 
         @param key: key of the new item in the collection
         """
-        raise NotImplementedError
+        return self._keys
 
     def __len__(self) -> int:
         """
@@ -80,7 +102,7 @@ class HashMap:
 
         @return collections as a string
         """
-        return self
+        return f"{self._keys}:{self._values}"
 
     def _hash(self, key: int) -> int:
         """
@@ -89,7 +111,7 @@ class HashMap:
         Simple remainder
         @param key: key of an element
         """
-        raise NotImplementedError
+        return key%10
 
     def _rehash(self, old_hash: int, step: int = 1) -> int:
         """
@@ -100,7 +122,7 @@ class HashMap:
         @param step: step (1 by default)
         @return new hash
         """
-        raise NotImplementedError
+        return (old_hash+step)%10
 
     def keys(self) -> List[int]:
         """
