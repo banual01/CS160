@@ -40,16 +40,24 @@ class HashMap:
         """
         if not None in self._keys:
             raise MemoryError("Hash Table is full")
+        
         hash_value = self._hash(key)
         first_hash = hash_value
-        count = 1
-        while self._keys[hash_value] is not None and self._keys[hash_value] != key:
-            hash_value = self._rehash(first_hash, count)
-            count +=1
-        
-        self._keys[hash_value] = key
-        self._values[hash_value] = value
+        if self._keys[hash_value] is None:
+            self._keys[hash_value] = key
+            self._values[hash_value] = value
+    
+        elif self._keys[hash_value] == key:
+            self._values[hash_value] = value  # replace
 
+        else:
+            count = 1
+            while self._keys[hash_value] is not None and self._keys[hash_value] != key:
+                print(hash_value)
+                hash_value = self._rehash(first_hash, count)
+                count +=1
+            self._keys[hash_value] = key
+            self._values[hash_value] = value
 
     def __getitem__(self, key: int) -> Any:
         """
@@ -65,6 +73,7 @@ class HashMap:
 
         @param key: key of the new item in the collection
         """
+        """code from textbook"""
         start_slot = self._hash(key)
 
         position = start_slot
@@ -127,7 +136,7 @@ class HashMap:
         @param step: step (1 by default)
         @return new hash
         """
-        return (old_hash+step)%self._size
+        return (old_hash+(step*step))%self._size
 
     def keys(self) -> List[int]:
         """
