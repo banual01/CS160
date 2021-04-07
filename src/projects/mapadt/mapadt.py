@@ -40,27 +40,40 @@ class HashMap:
         """
         """code from textbook"""
         
-        hash_value = self._hash(key)
+        # hash_value = self._hash(key)
 
-        if self._keys[hash_value] is None:
-            self._keys[hash_value] = key
-            self._values[hash_value] = value
-        else:
-            if self._keys[hash_value] == key:
-                self._values[hash_value] = value  # replace
-            else:
-                next_slot = self._rehash(hash_value)
-                while (
-                    self._keys[next_slot] is not None
-                    and self._keys[next_slot] != key
-                ):
-                    next_slot = self._rehash(next_slot)
+        # if self._keys[hash_value] is None:
+        #     self._keys[hash_value] = key
+        #     self._values[hash_value] = value
+        # else:
+        #     if self._keys[hash_value] == key:
+        #         self._values[hash_value] = value  # replace
+        #     else:
+        #         next_slot = self._rehash(hash_value)
+        #         while (
+        #             self._keys[next_slot] is not None
+        #             and self._keys[next_slot] != key
+        #         ):
+        #             next_slot = self._rehash(next_slot)
 
-                if self._keys[next_slot] is None:
-                    self._keys[next_slot] = key
-                    self._values[next_slot] = value
-                else:
-                    self._values[next_slot] = value
+        #         if self._keys[next_slot] is None:
+        #             self._keys[next_slot] = key
+        #             self._values[next_slot] = value
+        #         else:
+        #             self._values[next_slot] = value
+
+        # if not None in self._keys:
+        #     raise MemoryError("Hash Table is full")
+        # hash_value = self._hash(key)
+        # first_hash = hash_value
+        # count = 1
+        # while self._keys[hash_value] is not None and self._keys[hash_value] != key:
+        #     hash_value = self._rehash(first_hash, count)
+        #     count +=1
+        
+        # self._keys[hash_value] = key
+        # self._values[hash_value] = value
+
 
     def __getitem__(self, key: int) -> Any:
         """
