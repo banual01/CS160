@@ -40,27 +40,27 @@ class HashMap:
         """
         """code from textbook"""
         
-        hash_value = self._hash(key, self._size)
+        hash_value = self._hash(key)
 
-        if self.keys[hash_value] is None:
-            self.keys[hash_value] = key
-            self.value[hash_value] = value
+        if self._keys[hash_value] is None:
+            self._keys[hash_value] = key
+            self._values[hash_value] = value
         else:
-            if self.keys[hash_value] == key:
-                self.value[hash_value] = value  # replace
+            if self._keys[hash_value] == key:
+                self._values[hash_value] = value  # replace
             else:
-                next_slot = self._rehash(hash_value, self._size)
+                next_slot = self._rehash(hash_value)
                 while (
-                    self.keys[next_slot] is not None
-                    and self.keys[next_slot] != key
+                    self._keys[next_slot] is not None
+                    and self._keys[next_slot] != key
                 ):
-                    next_slot = self._rehash(next_slot, self._size)
+                    next_slot = self._rehash(next_slot)
 
-                if self.keys[next_slot] is None:
-                    self.keys[next_slot] = key
-                    self.value[next_slot] = value
+                if self._keys[next_slot] is None:
+                    self._keys[next_slot] = key
+                    self._values[next_slot] = value
                 else:
-                    self.value[next_slot] = value
+                    self._values[next_slot] = value
 
     def __getitem__(self, key: int) -> Any:
         """
@@ -120,7 +120,7 @@ class HashMap:
         Simple remainder
         @param key: key of an element
         """
-        return key%10
+        return key%self._size
 
     def _rehash(self, old_hash: int, step: int = 1) -> int:
         """
@@ -131,7 +131,7 @@ class HashMap:
         @param step: step (1 by default)
         @return new hash
         """
-        return (old_hash+step)%10
+        return (old_hash+step)%self._size
 
     def keys(self) -> List[int]:
         """
