@@ -10,7 +10,7 @@ from mapadt import HashMap
 
 
 def main():
-    map = HashMap(5)
+    map = HashMap(6)
     print("Map (empty)")
     print("Expected output: {}")
     print(f"Produced output: {map}")
@@ -68,6 +68,19 @@ def main():
 
     print("Items (method)")
     print("Expected output: [(20, 'cat'), (61, 'bee'), (21, 'dog'), (18, 'ant')]")
+    print(f"Produced output: {map.items()}")
+
+
+    map[999]= "jackal"
+    map[998] = "koala"
+    print("Items (method)")
+    print(f"Produced output: {map.items()}")
+    map[999] = "jackalope"
+    map[998] = "kangaroo"
+    print("Items (method)")
+    print(f"Produced output: {map.items()}")
+    map[1] = "zeebra"
+    print("Items (method)")
     print(f"Produced output: {map.items()}")
 
 

@@ -38,26 +38,26 @@ class HashMap:
         @param key: key of the item in the collection
         @param value: new value to be added to (updated in) the collection
         """
-        if not None in self._keys:
-            raise MemoryError("Hash Table is full")
         
+        if not None in self._keys and key not in self._keys:
+            raise MemoryError("Hash Table is full")
+
         hash_value = self._hash(key)
-        first_hash = hash_value
         if self._keys[hash_value] is None:
             self._keys[hash_value] = key
             self._values[hash_value] = value
-    
-        elif self._keys[hash_value] == key:
-            self._values[hash_value] = value  # replace
-
+        
         else:
+            original_hash = hash_value
             count = 1
             while self._keys[hash_value] is not None and self._keys[hash_value] != key:
-                print(hash_value)
-                hash_value = self._rehash(first_hash, count)
+                hash_value = self._rehash(original_hash, count)
                 count +=1
-            self._keys[hash_value] = key
-            self._values[hash_value] = value
+            if key not in self._keys and self._keys[hash_value] is None:
+                self._keys[hash_value] = key
+                self._values[hash_value] = value
+            else:
+                self._values[hash_value] = value
 
     def __getitem__(self, key: int) -> Any:
         """
