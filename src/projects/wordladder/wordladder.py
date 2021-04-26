@@ -18,7 +18,7 @@ class Solver:
         self.words3: Set[str] = set()  # 3-letter words
         self.words4: Set[str] = set()  # 4-letter words
         self.words5: Set[str] = set()  # 5-letter words
-        raise NotImplementedError
+        # raise NotImplementedError
 
     def distance(self, word1: str, word2: str) -> int:
         """
@@ -29,7 +29,24 @@ class Solver:
         @return number of different letters in the same positions
         @raises ValueError if words are not of the same length
         """
-        raise NotImplementedError
+        Counter1 = 0
+        for letter1 in word1:
+            Counter1 += 1
+
+        Counter2 = 0
+        for letter2 in word2:
+            Counter2 += 1
+
+        if Counter1 != Counter2:
+            raise ValueError("Must use words of the same length")
+        else:
+            numDiff = 0
+            for index in range(len(word1)):
+                if word1[index] != word2[index]:
+                    numDiff += 1
+            
+            return numDiff
+
 
     def diff_by_one_all(
         self, word: str, all_words: Set[str], used_words: Set[str]
