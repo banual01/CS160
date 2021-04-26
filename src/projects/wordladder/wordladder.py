@@ -18,7 +18,7 @@ class Solver:
         self.words3: Set[str] = set()  # 3-letter words
         self.words4: Set[str] = set()  # 4-letter words
         self.words5: Set[str] = set()  # 5-letter words
-        # raise NotImplementedError
+        raise NotImplementedError
 
     def distance(self, word1: str, word2: str) -> int:
         """
